@@ -6,20 +6,21 @@ AddCSLuaFile("shared.lua")
 AddCSLuaFile("sh_loader.lua")
 
 GM.PreventFallDamage = false
-GM.DefaultWalkSpeed = 150
-GM.DefaultRunSpeed = 220
+GM.DefaultWalkSpeed = 150 -- or "max", min is 100
+GM.DefaultRunSpeed = 220 -- or "max", min is 170 (unless we add modifiers to affect that later?)
+GM.DefaultJumpPower = 150 -- or "max", matches walk speed
 GM.TimePassed = 0
 
 util.AddNetworkString("SendSingleSound")
 util.AddNetworkString("PlayerChatColor")
 
-local _Ply = FindMetaTable("Player")
-function _Ply:AddScore(score)
+local Ply = FindMetaTable("Player")
+function Ply:AddScore(score)
 	local num = self:GetNWInt("tdm_score")
 	self:SetNWInt("tdm_score", num + score)
 end
 
-function _Ply:SendSound(dir)
+function Ply:SendSound(dir)
     net.Start("SendSingleSound")
         net.WriteString(dir)
     net.Send(self)
@@ -31,7 +32,7 @@ function BroadcastSound(dir)
     net.Broadcast()
 end
 
-function _Ply:ChatPrintColor(...)
+function Ply:ChatPrintColor(...)
 	local args = { ... }
     local tab = {}
     
@@ -71,34 +72,13 @@ if not file.Exists("gz/users", "DATA") then
 	file.CreateDir("gz/users")
 end
 
--- Relic of a bygone era
---[[if not file.Exists("tdm/users/skins", "DATA") then
-	file.CreateDir("tdm/users/skins")
-end
-
-if not file.Exists("tdm/users/models", "DATA") then
-	file.CreateDir("tdm/users/models")
-end
-
-if not file.Exists("tdm/class", "DATA") then
-	file.CreateDir("tdm/class")
-end
-
-if not file.Exists("tdm/cheaters", "DATA") then
-	file.CreateDir("tdm/cheaters")
-end
-
-if not file.Exists("tdm/users/extra", "DATA") then
-	file.CreateDir("tdm/users/extra")
-end]]
-
 function GM:Initialize()
 	--[[
 		- Set up map (player spawns, zombie spawns, storage locations, anything else)
 		- Set up any edited globals
 		- Start game timer
 	]]
-	self:SetupMap()
+	--self:SetupMap()
 
 	timer.Create("GameTimer", 1, 0, function()
 		GAMEMODE.TimePassed = GAMEMODE.TimePassed + 1
@@ -148,10 +128,27 @@ function GM:PlayerInitialSpawn(ply)
 	ply:ConCommand("cw_laser_quality 1")
 	ply:ConCommand("cw_alternative_vm_pos 0")]]
 
-	ply:ConCommand("cl_deathview 1")
+	--ply:ConCommand("cl_deathview 1")
 	ply:SetTeam(0)
-	ply:Spectate(OBS_MODE_CHASE)
+	--ply:Spectate(OBS_MODE_CHASE)
 end
+
+function GM:PlayerSpawn(ply, firstSpawn)
+	ply:Spectate(OBS_MODE_NONE)
+	self.BaseClass:PlayerSpawn( ply )
+	ply:SetModel("models/player/odessa.mdl")
+
+	ply:SetWalkSpeed( self.DefaultWalkSpeed )
+	ply:SetRunSpeed( self.DefaultRunSpeed )
+	ply:SetJumpPower( self.DefaultJumpPower )
+
+	hook.Call( "gZPostPlayerSpawn", GAMEMODE, ply )
+	return false
+end
+
+function GM:PlayerSetModel( ply )
+	ply:SetModel( "models/player/odessa.mdl" )
+ end
 
 function GM:PlayerDeathSound()
 	return true
@@ -175,59 +172,6 @@ function GM:PlayerShouldTakeDamage(ply, attacker)
 	end]]
 	
 	return true
-end
-
-function GM:PlayerSpawn(ply)
-	if(ply:Team() == 0) then
-		ply:Spectate(OBS_MODE_IN_EYE)
-		--SetupSpectator(ply)
-		return
-	end
-	
-	self.BaseClass:PlayerSpawn(ply)
-
-	ply:SetWalkSpeed(GAMEMODE.DefaultWalkSpeed)
-	ply:SetRunSpeed(GAMEMODE.DefaultRunSpeed)
-	ply:SetJumpPower(GAMEMODE.DefaultJumpPower)
-
-	ply:AllowFlashlight(false)
-	ply:SetNoCollideWithTeammates(true)
-    --ply:ConCommand("cw_simple_telescopics 0") --So everyone's on an equal playing field, also because some ACOGs don't work properly with it enabled
-    
-    GAMEMODE.PlayerLoadouts[ply] = GAMEMODE.PlayerLoadouts[ply] or {}
-    if GAMEMODE.PlayerLoadouts[ply].playermodel then
-        ply:SetModel(GAMEMODE.PlayerLoadouts[ply].playermodel)
-        
-        if GAMEMODE.PlayerLoadouts[ply].playermodelskin then
-            ply:SetSkin(GAMEMODE.PlayerLoadouts[ply].playermodelskin)
-        end
-        ply:SetPlayerColor(col[ply:Team()])
-        
-        if GAMEMODE.PlayerLoadouts[ply].playermodelbodygroups then
-            for bodygroup, value in pairs(GAMEMODE.PlayerLoadouts[ply].playermodelbodygroups) do
-                ply:SetBodygroup(bodygroup, value)
-            end
-        end
-    else
-        local teamName = team.GetName(ply:Team())
-        local model = self.DefaultModels[teamName][math.random(#self.DefaultModels[teamName])]
-        
-        ply:SetModel(model)
-        ply:SetSkin(math.random(ply:SkinCount()))
-        if #ply:GetBodyGroups() > 1 then
-            for _, bgdata in pairs(ply:GetBodyGroups()) do
-                ply:SetBodygroup(bgdata.id, math.random(bgdata.num))
-            end
-        end
-        ply:SetPlayerColor(col[ply:Team()])
-    end
-
-    ply:RemoveAllAmmo()
-    --giveLoadout(ply) -- Perhaps we want a basic loadout of fists?
-    
-    hook.Call("PostPlayerSpawn", GAMEMODE, ply)
-    
-	return false
 end
 
 function GM:PlayerDeath(vic, inf, att)

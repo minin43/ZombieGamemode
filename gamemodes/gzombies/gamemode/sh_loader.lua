@@ -30,7 +30,7 @@ function IncludeNewFile( fileName, directory )
 end
 
 --//Custom hooks
-if SERVER then
+--[[if SERVER then
     include( "gzombies/gamemode/custom/sv_custom.lua" )
     include( "gzombies/gamemode/custom/sh_custom.lua" )
 
@@ -39,11 +39,11 @@ if SERVER then
 else
     include( "gzombies/gamemode/custom/sh_custom.lua" )
     include( "gzombies/gamemode/custom/cl_custom.lua" )
-end
+end]]
 
 local _, gamemodeDirectories = file.Find( "gzombies/gamemode/*", "LUA" )
 for k, v in pairs( gamemodeDirectories ) do
-    if !toLoad[ v ] then
+    if !SkipLoad[ v ] then
         local files, _ = file.Find( "gzombies/gamemode/" .. v .. "/*", "LUA" )
         for _, fileName in pairs( files ) do
             IncludeNewFile( fileName, v )

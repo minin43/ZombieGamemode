@@ -1,11 +1,14 @@
+GM.LootablesMasterTable = {}
+
 if not file.Exists( "gz/map_edits", "DATA" ) then
 	file.CreateDir( "gz/map_edits" )
 end
 
 if not file.Exists( "gz/map_edits/" .. game.GetMap() .. ".txt", "DATA" ) then
-	file.Write( "gz/map_edits/" .. game.GetMap() .. ".txt", util.TableToJSON( { playerSpawns = {}, zombieSpawns = {}, lootableSpawns = {}, propSpawns = {}, propDeletions = {} } ) )
+	file.Write( "gz/map_edits/" .. game.GetMap() .. ".txt", util.TableToJSON( { playerSpawns = {}, zombieSpawns = {}, propSpawns = {}, propDeletions = {} } ) )
 end
 
+-- Spawns in and collects the props used for looting
 function GM:SetupMap( doCleanUp )
     if hook.Call( "PreSetupMap", self, doCleanUp ) then return end
 
@@ -24,6 +27,7 @@ function GM:SetupMap( doCleanUp )
             if !IsValid(spawn) then return end
             spawn:SetPos(v.pos)
             spawn:SetAngles(v.ang)
+            spawn:Spawn()
         end
     end
 
@@ -33,32 +37,31 @@ function GM:SetupMap( doCleanUp )
             if !IsValid(spawn) then return end
             spawn:SetPos(v.pos)
             spawn:SetAngles(v.ang)
+            spawn:Spawn()
         end
     end
 
-    if self.cleanedFile.lootableSpawns then
-        for k, v in pairs(self.cleanedFile.lootableSpawns) do
-        local spawn = ents.Create(v.class)
-        if !IsValid(spawn) then return end
-        spawn:SetPos(v.pos)
-        spawn:SetAngles(v.ang)
-    end
-
+    -- Need to include a check for any map-spawn props that share the lootable's model, and add them to any GM tables we store
     if self.cleanedFile.propSpawns then
         for k, v in pairs( self.cleanedFile.propSpawns ) do
-            local prop = ents.Create( "prop_physics" )
-            if !IsValid( prop ) then return end
-            prop:SetModel( v.model )
-            prop:SetPos( v.pos )
-            prop:SetAngles( v.ang )
-            prop:Spawn()
-            if v.locked then
-                prop:SetMoveType( MOVETYPE_NONE )
-                prop:SetUseType( SIMPLE_USE )
-                prop:SetSolid( SOLID_VPHYSICS )
+            --[[print(k, v)
+            PrintTable(v)]]
+            local spawn = ents.Create("gz_lootable")
+            if !IsValid(spawn) then return end
+            spawn:SetPos(v.pos)
+            spawn:SetAngles(v.ang)
+            spawn:SetModel(v.model)
+            spawn:SetMoveType( MOVETYPE_NONE )
+            spawn:SetSolid( SOLID_VPHYSICS )
+            spawn:Spawn()
 
-                local physobject = prop:GetPhysicsObject()
-                if physobject and physobject:IsValid() then physobject:EnableMotion( false ) end
+            local physobject = spawn:GetPhysicsObject()
+            if physobject and physobject:IsValid() then physobject:EnableMotion( false ) end
+
+            if self.PropSizeTable[v.model] then
+                table.insert(self.LootablesMasterTable, spawn)
+                -- Anything else we need to do here?
+                -- Does any of it need to be done before spawning?
             end
         end
     end
@@ -106,8 +109,23 @@ function GM:SetupMap( doCleanUp )
     hook.Call("PostSetupMap", self)
 end
 
---[[hook.Add( "InitPostEntity", "SpawnCustomProps", function()
+-- Populates the lootables in the game with a random assortment of gz_loot_base items
+function GM:SetupLoot()
+    for k, v in ipairs(self.LootablesMasterTable) do
+        for i = 1, v.Size do
+            local doSpawn = (math.random(i * 2) == 1)
+            if doSpawn then
+                local type = self.LootDistribution[math.random(100)]
+                local lootClass = self.LootDistribution[type][math.random(100)]
+                local loot = GM.LootTable[lootClass].GenerateRandomLoot() -- TO-DO
+                v:AddLoot(loot)
+            end
+        end
+    end
+end
+
+hook.Add( "InitPostEntity", "SpawnCustomProps", function()
     timer.Simple( 3, function()
-        GAMEMODE:RefreshCustomProps() 
+        GAMEMODE:SetupMap()
     end )
-end )]]
+end )

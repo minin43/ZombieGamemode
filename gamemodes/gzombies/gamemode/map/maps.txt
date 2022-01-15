@@ -1,0 +1,7 @@
+Decent maps:
+- gm_yanov_night
+- rp_warfare_chaes  -  Really good option, but it's set during late day
+- rp_zaton_remaster
+- rp_necro_forest
+- gm_boreas         -  Really big map, POIs are cool but sparse
+- gm_valley         -  Big map, but set during full day

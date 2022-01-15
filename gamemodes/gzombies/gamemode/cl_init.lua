@@ -64,12 +64,3 @@ GM.ButtonSounds = {
         "ambient/levels/labs/coinslot1.wav"
     }
 }
-
-GM.ColorRarities = {
-    [0] = Color(20, 20, 20, 200), --Black/dark gray
-    [1] = Color(87, 139, 235), --//Light blue
-    [2] = Color(153, 102, 204), --//Amethyst purple
-    [3] = Color(255, 215, 0), --//Gold
-    [4] = Color(252, 57, 3), --//Red-Orange
-    [5] = Color(0, 255, 255) --//Cyan
-}
