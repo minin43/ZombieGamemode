@@ -113,11 +113,10 @@ end
 function GM:SetupLoot()
     for k, v in ipairs(self.LootablesMasterTable) do
         for i = 1, v.Size do
-            local doSpawn = (math.random(i * 2) == 1)
+            local doSpawn = (math.random(i * 2) == 1) -- Each additional spot has 1/2 chance of previous to spawn something in
             if doSpawn then
-                local type = self.LootDistribution[math.random(100)]
-                local lootClass = self.LootDistribution[type][math.random(100)]
-                local loot = GM.LootTable[lootClass].GenerateRandomLoot() -- TO-DO
+                local loot = self:GenRandomLoot()
+                -- Do we assign the fluff info here? Or later? (i.e. the manufacturer)
                 v:AddLoot(loot)
             end
         end

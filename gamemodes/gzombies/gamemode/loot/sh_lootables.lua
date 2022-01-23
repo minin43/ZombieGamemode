@@ -8,7 +8,7 @@ GM.OpenSounds = {
     MetalMed = "gzombies/lootables/metal1med.wav",
     MetalHeavy2 = "gzombies/lootables/metal2heavy.wav",
     OPENclose = "gzombies/lootables/container_open.wav",
-    openCLOSE = "gzombies/lootables/container_close.wav"
+    openCLOSE = "gzombies/lootables/container_close.wav" --To be utilized at some point in the future, for when you shut the lootable
 }
 
 GM.PropTable = {
@@ -41,3 +41,12 @@ GM.PropTable = {
     ["models/props_vehicles/car004a_physics.mdl"] = {size = 6, snd = GAMEMODE.OpenSounds.OPENclose},
     ["models/props_vehicles/car005a_physics.mdl"] = {size = 6 snd = GAMEMODE.OpenSounds.OPENclose}
 }
+
+if SERVER then
+    function GM:GenRandomLoot()
+        --[[local randNum = math.random(100)
+        local lootType = self.LootDistribution[randNum]
+        return self.LootTable[lootType].GenerateRandomLoot()]]
+        return self.LootTable[self.LootDistribution[math.random(100)]].GenerateRandomLoot()
+    end
+end

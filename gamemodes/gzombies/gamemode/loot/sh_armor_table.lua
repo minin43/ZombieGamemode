@@ -209,25 +209,31 @@ GM.LootTable.ARMOR = {
     }
     -- Returns the name of the loot
     GenerateRandomLoot = function()
+        -- If the armor loot table has yet to be generated, do so now
         if !GAMEMODE.LootTable.ARMOR.Generated then
             GAMEMODE.LootTable.ARMOR.GenerateRandomLootTable()
         end
+
+        -- Pull a random piece of armor from the table, return it
         local toReturn = GAMEMODE.LootTable.ARMOR.Generated[math.random(#GAMEMODE.LootTable.ARMOR.Generated)].Class
         --[[if toReturn.Type != GAMEMODE.ArmorTypes.PLATE then -- Should this be a separate function?
             if toReturn.Rarity == GAMEMODE.Rarities.EXOTIC then
-                toReturn.Manufacturer = GAMEMODE.FictionalManufacturers.Exotic[1]
+                toReturn.Manufacturer = GAMEMODE.FictionalArmorManufacturers.Exotic[1]
             else
-                toReturn.Manufacturer = GAMEMODE.FictionalManufacturers[toReturn.Type][math.random(#GAMEMODE.FictionalManufacturers[toReturn.Type])]
+                toReturn.Manufacturer = GAMEMODE.FictionalArmorManufacturers[toReturn.Type][math.random(#GAMEMODE.FictionalManufacturers[toReturn.Type])]
             end
         end]]
         return toReturn
     end
-    GenerateRandomLootTable = function()
+    GenerateLootTable = function()
+        --[[How the loot table is generated:
+            Any "common" rarity item appears in the table 6 times. As the item becomes more rare, it appears 1 fewer times.
+            A random number between 1 and the size of the table is generated to pull from it]]
         GAMEMODE.LootTable.ARMOR.Generated = {}
         for k, v in pairs(GAMEMODE.LootTable.ARMOR) do
-            if istable(v) then
+            if istable(v) then -- Ignore functions in our search
                 local tabCount = #GAMEMODE.LootTable.ARMOR.Generated
-                for i = 1, 7 - v.Rarity do
+                for i = 1, 7 - v.Rarity do -- 7 could be replaced with the count of our rarity table + 1, but maybe any more rare and it shouldn't randomly spawn in?
                     v.Class = k
                     GAMEMODE.LootTable.ARMOR.Generated[tabCount + i] = v
                 end
@@ -236,7 +242,7 @@ GM.LootTable.ARMOR = {
     end
 }
 
-GM.FictionalManufacturers = {
+GM.FictionalArmorManufacturers = {
     Vest = {"Backtrack", "Altai Tactical Wear", "Spartan Armament", "Tread Gear"},
     Carrier = {"Citizen Armory", "Leatherpack Gear", "Talos Tactical", "Guardian Ballistics"},
     Exotic = {"Olympus Tactical"}

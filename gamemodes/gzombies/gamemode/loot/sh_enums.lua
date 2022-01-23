@@ -1,3 +1,5 @@
+-- Enumerations
+
 GM.LootType = {
     BASE = 0, -- Nothing found while playing should have this type
     GEAR = 10,
@@ -19,41 +21,65 @@ GM.ArmorTypes = {
     CARRIER = 2,
     PLATE = 3,
     HELMET = 4,
-    FACE = 5 -- Any more?
+    FACE = 5
 }
 
--- Must all, individually add up to 100
+GM.WeaponTypes = {
+    GUN = 1,
+    ATTACH = 2,
+    MELEE = 3
+}
+
+GM.ResourceTypes = {
+    BULLETS = 1,
+    MAGS = 2,
+    RAW = 3,
+    MEDS = 4
+}
+
+GM.ToolTypes = {
+    BUILD = 1,
+    HARVEST = 2,
+    LIGHT = 3
+}
+
+-- Distributions
+
 GM.LootDistributionSetup = {
-    WEAPONS = 20,
-    TOOLS = 25,
-    ARMOR = 20,
-    RESOURCES = 35
+    WEAPONS = 25,
+    TOOLS = 10,
+    ARMOR = 25,
+    RESOURCES = 40
 }
+
 GM.WeaponDistributions = {
-    GUNS = 45,
-    ATTACH = 20,
-    MELEE = 35
+    [GM.WeaponsTypes.GUNS] = 45,
+    [GM.WeaponsTypes.ATTACH] = 20,
+    [GM.WeaponsTypes.MELEE] = 35
 }
+
 GM.ToolsDistribution = {
-    FLASH = 100
+    [GM.ToolTypes.BUILD] = 33,
+    [GM.ToolTypes.HARVEST] = 33,
+    [GM.ToolTypes.LIGHT] = 34
 }
+
 GM.ArmorDistribution = {
-    VESTS = 45,
-    CARRIER = 35,
-    PLATE = 20
+    [GM.ArmorTypes.VEST] = 20,
+    [GM.ArmorTypes.CARRIER] = 20,
+    [GM.ArmorTypes.PLATE] = 20,
+    [GM.ArmorTypes.HELMET] = 20,
+    [GM.ArmorTypes.FACE] = 20
 }
+
 GM.ResourceDistribution = {
-    BULLETS = 20,
-    MAGS = 15,
-    RAW = 40,
-    MEDS = 25
+    [GM.ResourceTypes.BULLETS] = 20,
+    [GM.ResourceTypes.MAGS] = 15,
+    [GM.ResourceTypes.RAW] = 40,
+    [GM.ResourceTypes.MEDS] = 25
 }
-GM.LootDistribution = { -- This is THE TABLE used to determine loot
-    WEAPONS = {},
-    TOOLS = {},
-    ARMOR = {},
-    RESOURCES = {}
-}
+
+GM.LootDistribution = {} -- We'll use a distribution table instead of any other method, because I guess I don't know what other method would work
 local counter = 0
 for k, v in pairs(GM.LootDistributionSetup) do
     for i = 1, v do
@@ -61,28 +87,3 @@ for k, v in pairs(GM.LootDistributionSetup) do
     end
     counter = counter + v
 end
-counter = 0
-for k, v in pairs(GM.WeaponDistributions) do
-    for i = 1, v do
-        GM.LootDistribution.WEAPONS[i + counter] = k
-    end
-    counter = counter + k
-end
-counter = 0
-for k, v in pairs(GM.ArmorDistribution) do
-    for i = 1, v do
-        GM.LootDistribution.ARMOR[i + counter] = k
-    end
-    counter = counter + k
-end
-counter = 0
-for k, v in pairs(GM.ResourceDistribution) do
-    for i = 1, v do
-        GM.LootDistribution.RESOURCES[i + counter] = k
-    end
-    counter = counter + k
-end
-
-GM.WeightTable = {
-    -- Will literally need to include everything in this table
-}

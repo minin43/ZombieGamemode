@@ -9,7 +9,7 @@ function IncludeNewFile( fileName, directory )
     local sepFileName = string.Explode( "_", fileName )
     local toUse = directory .. "/" .. fileName
 
-    print("[gZ] including new file: " .. fileName)
+    print("[gZ] Including new file: " .. fileName)
 
     if sepFileName[1] == "sv" then
         if SERVER then include( toUse ) end
