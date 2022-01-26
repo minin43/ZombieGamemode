@@ -215,7 +215,8 @@ GM.LootTable.ARMOR = {
         end
 
         -- Pull a random piece of armor from the table, return it
-        local toReturn = GAMEMODE.LootTable.ARMOR.Generated[math.random(#GAMEMODE.LootTable.ARMOR.Generated)].Class
+        local type = GAMEMODE.LootTable.Armor.DistributionTable[math.random(100)]
+        local toReturn = GAMEMODE.LootTable.ARMOR.Generated[type][math.random(#GAMEMODE.LootTable.ARMOR.Generated[type])].Class
         --[[if toReturn.Type != GAMEMODE.ArmorTypes.PLATE then -- Should this be a separate function?
             if toReturn.Rarity == GAMEMODE.Rarities.EXOTIC then
                 toReturn.Manufacturer = GAMEMODE.FictionalArmorManufacturers.Exotic[1]
@@ -229,13 +230,24 @@ GM.LootTable.ARMOR = {
         --[[How the loot table is generated:
             Any "common" rarity item appears in the table 6 times. As the item becomes more rare, it appears 1 fewer times.
             A random number between 1 and the size of the table is generated to pull from it]]
-        GAMEMODE.LootTable.ARMOR.Generated = {}
+        GAMEMODE.LootTable.ARMOR.DistributionTable = {}
+        local counter = 0
+        for k, v in pairs(GAMEMODE.ArmorDistribution) do
+            for i = 1, v do
+                GAMEMODE.LootTable.ARMOR.DistributionTable[i + counter] = k
+            end
+            counter = counter + v
+        end
+        
+        GAMEMODE.LootTable.ARMOR.Generated = {[GAMEMODE.ArmorTypes.VEST] = {}, [GAMEMODE.ArmorTypes.CARRIER] = {},
+            [GAMEMODE.ArmorTypes.PLATE] = {}, [GAMEMODE.ArmorTypes.HELMET] = {}, [GAMEMODE.ArmorTypes.FACE] = {}}
         for k, v in pairs(GAMEMODE.LootTable.ARMOR) do
             if istable(v) then -- Ignore functions in our search
-                local tabCount = #GAMEMODE.LootTable.ARMOR.Generated
+                local subtable = GAMEMODE.LootTable.ARMOR.Generated[v.Type]
+                local tabCount = #subtable
                 for i = 1, 7 - v.Rarity do -- 7 could be replaced with the count of our rarity table + 1, but maybe any more rare and it shouldn't randomly spawn in?
                     v.Class = k
-                    GAMEMODE.LootTable.ARMOR.Generated[tabCount + i] = v
+                    subtable[tabCount + i] = v
                 end
             end
         end

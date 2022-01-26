@@ -43,10 +43,12 @@ GM.PropTable = {
 }
 
 if SERVER then
+    -- Generate a completely random piece of loot, used to populate lootables
     function GM:GenRandomLoot()
         --[[local randNum = math.random(100)
         local lootType = self.LootDistribution[randNum]
         return self.LootTable[lootType].GenerateRandomLoot()]]
+        -- Works by pulling a loot type from the general loot table distribution table, then pulls a random item from its table
         return self.LootTable[self.LootDistribution[math.random(100)]].GenerateRandomLoot()
     end
 end
