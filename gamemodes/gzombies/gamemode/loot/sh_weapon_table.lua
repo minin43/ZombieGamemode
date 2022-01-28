@@ -1,8 +1,12 @@
 GM.LootTable.WEAPONS = {
     -- Weapons
     gz_ar15 = {
-        cw_base = "cw_",
+        Base = "cw_",
         Type = GAMEMODE.WeaponTypes.,
+        Rarity = GAMEMODE.Rarities.,
+        Caliber = , -- Bullet penetration is calculated using bullet caliber + barrel length
+        Barrel = ,  -- We'll calculated dynamically to allow for future impementation of additional bullet types (FMJ, for example)
+        Mag = ,
     }
     gz_ak74
     gz_g3a3
@@ -39,4 +43,13 @@ GM.LootTable.WEAPONS = {
 
     -- Melee
     gz_knife -- Probably the only one?
+
+    GenerateLootTable = function()
+
+    end
+
+    GenerateRandomLoot = function()
+        -- If we pull a gun, should be a small chance it already has attachments
+        -- If we pull a gun, do we need to change its ammo type on the fly? OR should be done in weapons/sh_balancing?
+    end
 }

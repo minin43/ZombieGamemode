@@ -53,9 +53,9 @@ GM.LootDistributionSetup = {
 }
 
 GM.WeaponDistributions = {
-    [GM.WeaponsTypes.GUNS] = 45,
-    [GM.WeaponsTypes.ATTACH] = 20,
-    [GM.WeaponsTypes.MELEE] = 35
+    [GM.WeaponsTypes.GUNS] = 55,
+    [GM.WeaponsTypes.ATTACH] = 15,
+    [GM.WeaponsTypes.MELEE] = 30
 }
 
 GM.ToolsDistribution = {
