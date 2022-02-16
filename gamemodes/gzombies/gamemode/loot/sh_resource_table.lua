@@ -1,13 +1,49 @@
 GM.LootTable.RESOURCES = {
     -- Bullet calibers
-    5x56
-    7x62
-
-    -- Magazines for each weapon (need further research on shared magazines between guns)
-    Ar15mag = {
+    ["12 Gauge"] = {
 
     }
+    [".338 Lapua"]
+    [".44 Magnum"]
+    [".45 ACP"]
+    ["4.6x30MM"]
+    [".50 AE"]
+    ["5.45x39MM"]
+    ["5.56x45MM"]
+    ["5.7x28MM"]
+    ["7.62x51MM"]
+    ["7.62x54MMR"]
+    ["9x17MM"]
+    ["9x18MM"]
+    ["9x19MM"]
+    ["9x39MM"]
 
+    -- Magazines for each weapon
+    STANAGmag = {
+        Calliber = "5.56x45MM",
+        Size = 30
+    }
+    AKmag
+    G3mag
+    SCARmag
+    G36mag
+    M14mag
+    DRAGmag
+    AWMmag
+    MP5mag
+    MP7mag
+    UMPmag
+    MACmag
+    MP9mag
+    VSSmag
+    SAIGAmag
+    DEmag
+    M1911mag
+    P99mag
+    MAKmag
+    FIVE7mag
+    BOX
+    INTERNAL
 
     -- Raw resources - what raw resources would it make sense to even care about?
     Wood

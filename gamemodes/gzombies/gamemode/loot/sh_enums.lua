@@ -43,6 +43,14 @@ GM.ToolTypes = {
     LIGHT = 3
 }
 
+GM.Barrels = {
+    MINI = 1,
+    PISTOL = 2,
+    SMG = 3,
+    RIFLE = 4,
+    LONG_RIFLE = 5
+}
+
 -- Distributions
 
 GM.LootDistributionSetup = {
