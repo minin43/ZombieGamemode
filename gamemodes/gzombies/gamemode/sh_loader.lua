@@ -44,9 +44,13 @@ end]]
 local _, gamemodeDirectories = file.Find( "gzombies/gamemode/*", "LUA" )
 for k, v in pairs( gamemodeDirectories ) do
     if !SkipLoad[ v ] then
-        local files, _ = file.Find( "gzombies/gamemode/" .. v .. "/*", "LUA" )
-        for _, fileName in pairs( files ) do
-            IncludeNewFile( fileName, v )
+        if file.Exists("gzombies/gamemode/" .. v .. "/sh_load_order.lua", "LUA") then
+            IncludeNewFile("gzombies/gamemode/" .. v .. "/sh_load_order.lua", v)
+        else
+            local files, _ = file.Find( "gzombies/gamemode/" .. v .. "/*", "LUA" )
+            for _, fileName in pairs( files ) do
+                IncludeNewFile( fileName, v )
+            end
         end
     end
 end
