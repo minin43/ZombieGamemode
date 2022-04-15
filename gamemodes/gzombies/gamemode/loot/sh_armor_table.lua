@@ -1,6 +1,6 @@
 GM.LootTable.ARMOR = {
     --[[
-        -- Level = Protection level, higher better, mirrors real-life ballistic protection
+        -- Level = Protection level, higher better, attempts to mirror real-life ballistic protection
         -- Dispersal = Energy absorption, 1 transfering 90% damage, 10 transfering 0% damage, higher better
         -- FSDurability = First-Shot Durability, how many shots of at-level fire before integrity begins decreasing
         -- ContDurability = Continuous Durability, how much integrity decreases per at-level shot after FSDurability
