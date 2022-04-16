@@ -95,3 +95,13 @@ for k, v in pairs(GM.LootDistributionSetup) do
     end
     counter = counter + v
 end
+
+-- Non-numeric Enumations
+
+GM.MagazineModels = { -- These models are only included in the mag system addon
+    AR = "models/weapons/unloaded/rif_m4a1_mag.mdl",
+    BR = "models/weapons/unloaded/snip_g3sg1_mag.mdl",
+    PI = "models/weapons/unloaded/pist_fiveseven_mag.mdl",
+    SMG = "models/weapons/unloaded/smg_mp5_mag.mdl",
+    SR = "models/weapons/unloaded/snip_awp_mag.mdl"
+}

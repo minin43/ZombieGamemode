@@ -217,41 +217,75 @@ GM.LootTable.WEAPONS = {
         Mag = GAMEMODE.LootTable.RESOURCES.FIVE7mag,
     }
 
-    -- Attachments
     -- General Attachments, can be hot-swapped
-    gz_bipod
+    gz_kobra = {
+        Base = "",
+        Spawnable = true,
+    }
     gz_eotech
-    gz_microt1
-    gz_acog
     gz_aimpoint
-    gz_anpeq
+    gz_schmidt_shortdot
+    gz_pso1
+    gz_acog
+    gz_nightforce_nxs
+    gz_microt1
+    gz_sg1scope -- only bg_ attach here
+    gz_pbs1
+    gz_saker
+    gz_tundra9mm
     gz_foregrip
-    gz_insight
-    gz_kobra
+    gz_bipod
     gz_m203
-    gz_nxs
+    gz_anpeq15
+    gz_insight_x2
+    
+
     -- Weapon-specific, these can only be changed outside of a game instance
-    gz_ak74_rpkbarrel
-    gz_ak74_ubarrel
-    gz_ak74foldablestock
-    gz_ak74heavystock
-    gz_ak74rpkmag
-    gz_ar15heavystock
-    gz_ar15sturdystock
-    gz_ar1560rndmag
+    gz_foldsight
     gz_deagle_compensator
     gz_deagle_extendedbarrel
-    gz_foldsight
-    gz_longbarrel
+    gz_regularbarrel
     gz_longbarrelmr96
-    gz_longris
+    gz_mac11_extended_barrel
+    gz_ak74_rpkbarrel
+    gz_ak74_ubarrel
     gz_magpulhandguard
+    gz_longbarrel
+    gz_ris
+    gz_longris
     gz_mp5_kbarrel
     gz_mp5_sdbarrel
-    gz_mp530rndmag
+    gz_ak74foldablestock
+    gz_ak74heavystock
+    gz_ar15sturdystock
+    gz_ar15heavystock
+    gz_vss_foldable_stock
+    gz_makarov_pb6p9
+    gz_asval
+    gz_sr3m
     --[[
         To be disabled:, for potential future utilization
-        
+        bg_ak74rpkmag
+        am_magnum
+        am_matchgrade
+        am_reducedpowderload
+        bg_ar1560rndmag
+        md_cmag_556_official
+        md_cmag_556_official
+        bg_mp530rndmag
+        bg_retractablestock
+        bg_nostock
+        am_slugrounds
+        am_flechetterounds
+        bg_mac11_unfolded_stock
+        bg_makarov_pm_suppressor
+        bg_makarov_pb_suppressor
+        bg_makarov_extmag
+        am_sp7
+        bg_mp7_unsuppressed
+        am_ultramegamatchammo
+        bg_asval_20rnd
+        bg_asval_30rnd
     ]]
 
     -- Melee

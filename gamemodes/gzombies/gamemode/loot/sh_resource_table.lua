@@ -20,30 +20,159 @@ GM.LootTable.RESOURCES = {
 
     -- Magazines for each weapon
     STANAGmag = {
+        Name = "STANAG Magazine"
+        Calliber = "5.56x45MM",
+        Size = 30,
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.AR
+    },
+    AKmag = {
+        Name = "AK74 Magazine",
+        Calliber = "5.45x39mm",
+        Size = 30
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.AR
+    },
+    G3mag = {
+        Name = "G3A3 Magazine",
+        Calliber = "7.62x51MM",
+        Size = 20
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.BR
+    },
+    SCARmag = {
+        Name = "SCAR-H Magazine",
+        Calliber = "7.62x51MM",
+        Size = 20
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.BR
+    },
+    G36mag = {
+        Name = "G36C Magazine",
         Calliber = "5.56x45MM",
         Size = 30
-    }
-    AKmag
-    G3mag
-    SCARmag
-    G36mag
-    M14mag
-    DRAGmag
-    AWMmag
-    MP5mag
-    MP7mag
-    UMPmag
-    MACmag
-    MP9mag
-    VSSmag
-    SAIGAmag
-    DEmag
-    M1911mag
-    P99mag
-    MAKmag
-    FIVE7mag
-    BOX
-    INTERNAL
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.AR
+    },
+    M14mag = {
+        Name = "M14 EBR Magazine",
+        Calliber = "7.62x51MM",
+        Size = 20
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.BR
+    },
+    DRAGmag = {
+        Name = "Dragunov Magazine",
+        Calliber = "7.62x54MMR",
+        Size = 10
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.SR
+    },
+    AWMmag = {
+        Name = "L115 Magazine",
+        Calliber = ".338 Lapua",
+        Size = 5
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.SR
+    },
+    MP5mag = {
+        Name = "MP5 Magazine",
+        Calliber = "9x19MM",
+        Size = 20
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.SMG
+    },
+    MP7mag = {
+        Name = "MP7 Magazine",
+        Calliber = "4.6x30MM",
+        Size = 40
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.SMG
+    },
+    UMPmag = {
+        Name = "UMP Magazine",
+        Calliber = ".45 ACP",
+        Size = 25
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.SMG
+    },
+    MACmag = {
+        Name = "MAC-11 Magazine",
+        Calliber = "9x17MM",
+        Size = 32
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.SMG
+    },
+    MP9mag = {
+        Name = "MP9 Magazine",
+        Calliber = "9x19MM",
+        Size = 30
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.SMG
+    },
+    VSSmag = {
+        Name = "VSS Vintorez Magazine",
+        Calliber = "9x39MM",
+        Size = 10
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.SMG
+    },
+    SAIGAmag = {
+        Name = "SAIGA 12K Magazine",
+        Calliber = "12 Gauge",
+        Size = 5
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.SR
+    },
+    DEmag = {
+        Name = "Desert Eagle Magazine",
+        Calliber = ".50 AE",
+        Size = 7
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.PI
+    },
+    M1911mag = {
+        Name = "M1911 Magazine",
+        Calliber = ".45 ACP",
+        Size = 7
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.PI
+    },
+    P99mag = {
+        Name = "P99 Magazine",
+        Calliber = "9x19MM",
+        Size = 15
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.PI
+    },
+    MAKmag = {
+        Name = "Makarov Magazine",
+        Calliber = "9x18MM",
+        Size = 8
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.PI
+    },
+    FIVE7mag = {
+        Name = "Five-SeveN Magazine",
+        Calliber = "5.7x28MM",
+        Size = 20
+        Icon = "",
+        Model = GAMEMODE.MagazineModels.PI
+    },
+    BOX = {
+        Name = "Belt Ammo Box",
+        Calliber = "5.56x45MM", --Thankfully there's only 1 LMG to worry about
+        Size = 100
+        Icon = "",
+        --Model = GAMEMODE.MagazineModels.
+    },
+    INTERNAL = {
+        Name = "Internal",
+        Calliber = "",
+        Size = 0
+        Icon = "",
+        --Model = GAMEMODE.MagazineModels.
+    },
 
     -- Raw resources - what raw resources would it make sense to even care about?
     Wood
