@@ -5,6 +5,7 @@ ENT.Spawnable       = false
 ENT.Size            = 1
 ENT.DefaultSize     = 1
 ENT.DefaultModel    = "models/props_junk/cardboard_box004a.mdl"
+ENT.OpenAudio       = ""
 
 -- This is called after ENTITY:SetupDataTables() and GM:OnEntityCreated(), and when you Entity:Spawn() the custom entity.
 function ENT:Initialize()
@@ -16,13 +17,13 @@ function ENT:Initialize()
 	self:SetMoveType( MOVETYPE_NONE )
 	self:SetSolid( SOLID_VPHYSICS )
 	self:SetCollisionGroup( COLLISION_GROUP_INTERACTIVE )
+
     if SERVER then
         self:SetUseType(SIMPLE_USE)
 
-        self.Size = GAMEMODE.PropSizeTable[mdl or ""] or self.DefaultSize
+        self.Size = GAMEMODE.PropTable[mdl or ""].size or self.DefaultSize
     else
-        local mdlTbl = GAMEMODE.PropTable[self:GetModel()]
-        self.OpenAudio = mdlTbl.snd or GAMEMODE.OpenSounds.DEFAULT
+        self.OpenAudio = GAMEMODE.PropTable[self:GetModel()].snd or GAMEMODE.OpenSounds.DEFAULT
     end
 	--self:SetColor(Color(50, 50, 50))
 	--self:DrawShadow(true)

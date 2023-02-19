@@ -31,6 +31,7 @@ end
 function ENT:SendLoot(ply)
     print("default sendloot method")
     net.Start("OpenLootable")
+        net.WriteEntity(self)
         net.WriteTable(self.LootTable)
     net.Send(ply)
     self.InUse = ply
@@ -38,9 +39,10 @@ function ENT:SendLoot(ply)
 end
 
 function ENT:SendLootFirstTime(ply)
-    print("first-time sendloot method")
+    print("first-time sendloot method", self, ply)
     --function self:SendLoot(ply)
         net.Start("OpenLootableSearch")
+            net.WriteEntity(self)
             net.WriteInt(self.PerSizeLootTime * self.Size, 8) --This may be later altered even further to include a potential search proficiency bonus
             net.WriteTable(self.LootTable)
         net.Send(ply)

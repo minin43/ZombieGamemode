@@ -14,8 +14,8 @@ GM.LootTable.ARMOR = {
     -- Vests
     IIA_KEV = {
         Name = "Level IIA Kevlar Vest",
-        Type = GAMEMODE.ArmorTypes.VEST,
-        Level = GAMEMODE.ArmorLevels.IIA,
+        Type = GM.ArmorTypes.VEST,
+        Level = GM.ArmorLevels.IIA,
         Dispersal = 1,
         FSDurability = 0,
         ContDurability = 0,
@@ -28,8 +28,8 @@ GM.LootTable.ARMOR = {
     },
     II_KEV = {
         Name = "Level II Kevlar Vest",
-        Type = GAMEMODE.ArmorTypes.VEST,
-        Level = GAMEMODE.ArmorLevels.II,
+        Type = GM.ArmorTypes.VEST,
+        Level = GM.ArmorLevels.II,
         Dispersal = 2,
         FSDurability = 0,
         ContDurability = 0,
@@ -42,8 +42,8 @@ GM.LootTable.ARMOR = {
     },
     IIIA_KEV = {
         Name = "Level IIIA Kevlar Vest",
-        Type = GAMEMODE.ArmorTypes.VEST,
-        Level = GAMEMODE.ArmorLevels.IIIA,
+        Type = GM.ArmorTypes.VEST,
+        Level = GM.ArmorLevels.IIIA,
         Dispersal = 2,
         FSDurability = 0,
         ContDurability = 0,
@@ -56,8 +56,8 @@ GM.LootTable.ARMOR = {
     },
     III_AMY = {
         Name = "Level III Polymeric Amyloid Vest",
-        Type = GAMEMODE.ArmorTypes.VEST,
-        Level = GAMEMODE.ArmorLevels.III,
+        Type = GM.ArmorTypes.VEST,
+        Level = GM.ArmorLevels.III,
         Dispersal = 2,
         FSDurability = 0,
         ContDurability = 0,
@@ -83,167 +83,167 @@ GM.LootTable.ARMOR = {
     -- Plates
     WOOD = {
         Name = "Wood Block",
-        Type = GAMEMODE.ArmorTypes.PLATE,
-        Level = GAMEMODE.ArmorLevels.WOOD,
+        Type = GM.ArmorTypes.PLATE,
+        Level = GM.ArmorLevels.WOOD,
         Dispersal = 1,
         FSDurability = 8,
         ContDurability = 12,
         Integrity = 100,
         Weight = 0,
-        Rarity = GAMEMODE.Rarities.COMMON,
+        Rarity = GM.Rarities.COMMON,
         ExpResist = 15,
         Bulk = 0,
         PenResist = 5
     },
     III_ST = {
         Name = "Level III Steel Armor Plate",
-        Type = GAMEMODE.ArmorTypes.PLATE,
-        Level = GAMEMODE.ArmorLevels.III,
+        Type = GM.ArmorTypes.PLATE,
+        Level = GM.ArmorLevels.III,
         Dispersal = 8,
         FSDurability = 0,
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = GAMEMODE.Rarities.COMMON,
+        Rarity = GM.Rarities.COMMON,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
     },
     IV_ST = {
         Name = "Level IV Steel Armor Plate",
-        Type = GAMEMODE.ArmorTypes.PLATE,
-        Level = GAMEMODE.ArmorLevels.IV,
+        Type = GM.ArmorTypes.PLATE,
+        Level = GM.ArmorLevels.IV,
         Dispersal = 8,
         FSDurability = 0,
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = GAMEMODE.Rarities.RARE,
+        Rarity = GM.Rarities.RARE,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
     },
     III_POLY = {
         Name = "Level III Polythylene Armor Plate",
-        Type = GAMEMODE.ArmorTypes.PLATE,
-        Level = GAMEMODE.ArmorLevels.III,
+        Type = GM.ArmorTypes.PLATE,
+        Level = GM.ArmorLevels.III,
         Dispersal = 6,
         FSDurability = 0,
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = GAMEMODE.Rarities.UNCOMMON,
+        Rarity = GM.Rarities.UNCOMMON,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
     },
     III_TIT = {
         Name = "Level III Titanium Armor Plate",
-        Type = GAMEMODE.ArmorTypes.PLATE,
-        Level = GAMEMODE.ArmorLevels.III,
+        Type = GM.ArmorTypes.PLATE,
+        Level = GM.ArmorLevels.III,
         Dispersal = 5,
         FSDurability = 0,
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = GAMEMODE.Rarities.RARE,
+        Rarity = GM.Rarities.RARE,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
     },
     IV_TIT = {
         Name = "Level IV Titanium Armor Plate",
-        Type = GAMEMODE.ArmorTypes.PLATE,
-        Level = GAMEMODE.ArmorLevels.IV,
+        Type = GM.ArmorTypes.PLATE,
+        Level = GM.ArmorLevels.IV,
         Dispersal = 5,
         FSDurability = 0,
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = GAMEMODE.Rarities.EPIC,
+        Rarity = GM.Rarities.EPIC,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
     },
     VX_TPA = {
         Name = "Level V Titanium-Polythylene Armor Plate",
-        Type = GAMEMODE.ArmorTypes.PLATE,
-        Level = GAMEMODE.ArmorLevels.V_X,
+        Type = GM.ArmorTypes.PLATE,
+        Level = GM.ArmorLevels.V_X,
         Dispersal = 0,
         FSDurability = 0,
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = GAMEMODE.Rarities.EXOTIC,
+        Rarity = GM.Rarities.EXOTIC,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
     },
     III_CER = {
         Name = "Level III Ceramic Armor Plate",
-        Type = GAMEMODE.ArmorTypes.PLATE,
-        Level = GAMEMODE.ArmorLevels.III,
+        Type = GM.ArmorTypes.PLATE,
+        Level = GM.ArmorLevels.III,
         Dispersal = 0,
         FSDurability = 0,
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = GAMEMODE.Rarities.UNCOMMON,
+        Rarity = GM.Rarities.UNCOMMON,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
     },
     IV_CER = {
         Name = "Level IV Ceramic Armor Plate",
-        Type = GAMEMODE.ArmorTypes.PLATE,
-        Level = GAMEMODE.ArmorLevels.IV,
+        Type = GM.ArmorTypes.PLATE,
+        Level = GM.ArmorLevels.IV,
         Dispersal = 0,
         FSDurability = 0,
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = GAMEMODE.Rarities.RARE,
+        Rarity = GM.Rarities.RARE,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
-    }
+    },
     -- Returns the name of the loot
     GenerateRandomLoot = function()
         -- If the armor loot table has yet to be generated, do so now
-        if !GAMEMODE.LootTable.ARMOR.Generated then
-            GAMEMODE.LootTable.ARMOR.GenerateRandomLootTable()
+        if !GM.LootTable.ARMOR.Generated then
+            GM.LootTable.ARMOR.GenerateRandomLootTable()
         end
 
         -- Pull a random piece of armor from the table, return it
-        local type = GAMEMODE.LootTable.Armor.DistributionTable[math.random(100)]
-        local toReturn = GAMEMODE.LootTable.ARMOR.Generated[type][math.random(#GAMEMODE.LootTable.ARMOR.Generated[type])].Class
-        --[[if toReturn.Type != GAMEMODE.ArmorTypes.PLATE then -- Should this be a separate function?
-            if toReturn.Rarity == GAMEMODE.Rarities.EXOTIC then
-                toReturn.Manufacturer = GAMEMODE.FictionalArmorManufacturers.Exotic[1]
+        local type = GM.LootTable.Armor.DistributionTable[math.random(100)]
+        local toReturn = GM.LootTable.ARMOR.Generated[type][math.random(#GM.LootTable.ARMOR.Generated[type])].Class
+        --[[if toReturn.Type != GM.ArmorTypes.PLATE then -- Should this be a separate function?
+            if toReturn.Rarity == GM.Rarities.EXOTIC then
+                toReturn.Manufacturer = GM.FictionalArmorManufacturers.Exotic[1]
             else
-                toReturn.Manufacturer = GAMEMODE.FictionalArmorManufacturers[toReturn.Type][math.random(#GAMEMODE.FictionalManufacturers[toReturn.Type])]
+                toReturn.Manufacturer = GM.FictionalArmorManufacturers[toReturn.Type][math.random(#GM.FictionalManufacturers[toReturn.Type])]
             end
         end]]
         return toReturn
-    end
+    end,
     GenerateLootTable = function()
         --[[How the loot table is generated:
             Any "common" rarity item appears in the table 6 times. As the item becomes more rare, it appears 1 fewer times.
             A random number between 1 and the size of the table is generated to pull from it]]
-        GAMEMODE.LootTable.ARMOR.DistributionTable = {}
+        GM.LootTable.ARMOR.DistributionTable = {}
         local counter = 0
-        for k, v in pairs(GAMEMODE.ArmorDistribution) do
+        for k, v in pairs(GM.ArmorDistribution) do
             for i = 1, v do
-                GAMEMODE.LootTable.ARMOR.DistributionTable[i + counter] = k
+                GM.LootTable.ARMOR.DistributionTable[i + counter] = k
             end
             counter = counter + v
         end
         
-        GAMEMODE.LootTable.ARMOR.Generated = {[GAMEMODE.ArmorTypes.VEST] = {}, [GAMEMODE.ArmorTypes.CARRIER] = {},
-            [GAMEMODE.ArmorTypes.PLATE] = {}, [GAMEMODE.ArmorTypes.HELMET] = {}, [GAMEMODE.ArmorTypes.FACE] = {}}
-        for k, v in pairs(GAMEMODE.LootTable.ARMOR) do
+        GM.LootTable.ARMOR.Generated = {[GM.ArmorTypes.VEST] = {}, [GM.ArmorTypes.CARRIER] = {},
+            [GM.ArmorTypes.PLATE] = {}, [GM.ArmorTypes.HELMET] = {}, [GM.ArmorTypes.FACE] = {}}
+        for k, v in pairs(GM.LootTable.ARMOR) do
             if istable(v) then -- Ignore functions in our search
-                local subtable = GAMEMODE.LootTable.ARMOR.Generated[v.Type]
+                local subtable = GM.LootTable.ARMOR.Generated[v.Type]
                 local tabCount = #subtable
                 for i = 1, 7 - v.Rarity do -- 7 could be replaced with the count of our rarity table + 1, but maybe any more rare and it shouldn't randomly spawn in?
                     v.Class = k

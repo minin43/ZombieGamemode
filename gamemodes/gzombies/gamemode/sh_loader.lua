@@ -8,23 +8,28 @@ local SkipLoad = {
 function IncludeNewFile( fileName, directory )
     local sepFileName = string.Explode( "_", fileName )
     local toUse = directory .. "/" .. fileName
-
-    print("[gZ] Including new file: " .. fileName)
-
+    
     if sepFileName[1] == "sv" then
-        if SERVER then include( toUse ) end
+        if SERVER then 
+            include( toUse )
+            print("[gZ] Including new file: " .. fileName, directory)
+        end
     elseif sepFileName[1] == "sh" then
         if SERVER then 
             include( toUse )
             AddCSLuaFile( toUse )
+            print("[gZ] Including new file: " .. fileName, directory)
         else
             include( toUse )
+            print("[gZ] Including new file: " .. fileName, directory)
         end
     elseif sepFileName[1] == "cl" then
         if SERVER then
             AddCSLuaFile( toUse )
+            print("[gZ] Sending file to client: " .. fileName, directory)
         else
             include( toUse )
+            print("[gZ] Including new file: " .. fileName, directory)
         end
     end
 end
@@ -42,15 +47,18 @@ else
 end]]
 
 local _, gamemodeDirectories = file.Find( "gzombies/gamemode/*", "LUA" )
-for k, v in pairs( gamemodeDirectories ) do
-    if !SkipLoad[ v ] then
-        if file.Exists("gzombies/gamemode/" .. v .. "/sh_load_order.lua", "LUA") then
-            IncludeNewFile("gzombies/gamemode/" .. v .. "/sh_load_order.lua", v)
+for k, directoryName in pairs( gamemodeDirectories ) do
+    if !SkipLoad[ directoryName ] then
+        local str = "gzombies/gamemode/" .. directoryName .. "/sh_load_order.lua"
+        if file.Exists(str, "LUA") then
+            IncludeNewFile("sh_load_order.lua", "gzombies/gamemode/" .. directoryName)
         else
-            local files, _ = file.Find( "gzombies/gamemode/" .. v .. "/*", "LUA" )
+            local files, _ = file.Find( "gzombies/gamemode/" .. directoryName .. "/*", "LUA" )
             for _, fileName in pairs( files ) do
-                IncludeNewFile( fileName, v )
+                IncludeNewFile( fileName, directoryName )
             end
         end
     end
 end
+
+print("[gZ] Done loading files")

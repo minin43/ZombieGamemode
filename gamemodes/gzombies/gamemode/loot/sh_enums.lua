@@ -1,5 +1,5 @@
 -- Enumerations
-
+print("Logan Debug")
 GM.LootType = {
     BASE = 0, -- Nothing found while playing should have this type
     GEAR = 10,
@@ -61,9 +61,9 @@ GM.LootDistributionSetup = {
 }
 
 GM.WeaponDistributions = {
-    [GM.WeaponsTypes.GUNS] = 55,
-    [GM.WeaponsTypes.ATTACH] = 15,
-    [GM.WeaponsTypes.MELEE] = 30
+    [GM.WeaponTypes.GUN] = 55,
+    [GM.WeaponTypes.ATTACH] = 15,
+    [GM.WeaponTypes.MELEE] = 30
 }
 
 GM.ToolsDistribution = {
@@ -96,7 +96,7 @@ for k, v in pairs(GM.LootDistributionSetup) do
     counter = counter + v
 end
 
--- Non-numeric Enumations
+-- Non-numeric Enumerations
 
 GM.MagazineModels = { -- These models are only included in the mag system addon
     AR = "models/weapons/unloaded/rif_m4a1_mag.mdl",

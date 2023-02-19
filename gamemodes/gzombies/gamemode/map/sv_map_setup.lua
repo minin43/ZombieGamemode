@@ -8,6 +8,13 @@ if not file.Exists( "gz/map_edits/" .. game.GetMap() .. ".txt", "DATA" ) then
 	file.Write( "gz/map_edits/" .. game.GetMap() .. ".txt", util.TableToJSON( { playerSpawns = {}, zombieSpawns = {}, propSpawns = {}, propDeletions = {} } ) )
 end
 
+-- Include map files here
+GM.MapConfigs = {}
+local mapConfigs, _ = file.Find( "gzombies/gamemode/map/configs/*", "LUA" )
+for k, fileName in pairs(mapConfigs) do
+    IncludeNewFile(fileName, "gzombies/gamemode/map/configs")
+end
+
 -- Spawns in and collects the props used for looting
 function GM:SetupMap( doCleanUp )
     if hook.Call( "PreSetupMap", self, doCleanUp ) then return end
@@ -17,12 +24,20 @@ function GM:SetupMap( doCleanUp )
         game.CleanUpMap( false, { "player", "func_breakable", "prop_dynamic", "weapon_*", "item_*" } )
     end
 
-    self.referenceFile = file.Read( "gz/map_edits/" .. game.GetMap() .. ".txt", "DATA" )
-    self.cleanedFile = util.JSONToTable( self.referenceFile )
-    if not self.cleanedFile then Error("[gZ] Attempted map setup with invalid save file") return end
+    self.referenceFile = nil
+    if self.MapConfigs then
+        self.referenceFile = self.MapConfigs[game.GetMap()]
+    end
 
-    if self.cleanedFile.playerSpawns then
-        for k, v in pairs(self.cleanedFile.playerSpawns) do
+    if self.referenceFile == nil then
+        self.referenceFile = file.Read( "gz/map_edits/" .. game.GetMap() .. ".txt", "DATA" )
+        self.referenceFile = util.JSONToTable( self.referenceFile )
+    end
+
+    if not self.referenceFile then Error("[gZ] Attempted map setup with invalid save file") return end
+
+    if self.referenceFile.playerSpawns then
+        for k, v in pairs(self.referenceFile.playerSpawns) do
             local spawn = ents.Create("gz_player_spawn")
             if !IsValid(spawn) then return end
             spawn:SetPos(v.pos)
@@ -31,8 +46,8 @@ function GM:SetupMap( doCleanUp )
         end
     end
 
-    if self.cleanedFile.zombieSpawns then
-        for k, v in pairs(self.cleanedFile.zombieSpawns) do
+    if self.referenceFile.zombieSpawns then
+        for k, v in pairs(self.referenceFile.zombieSpawns) do
             local spawn = ents.Create("gz_zombie_spawn")
             if !IsValid(spawn) then return end
             spawn:SetPos(v.pos)
@@ -42,10 +57,8 @@ function GM:SetupMap( doCleanUp )
     end
 
     -- Need to include a check for any map-spawn props that share the lootable's model, and add them to any GM tables we store
-    if self.cleanedFile.propSpawns then
-        for k, v in pairs( self.cleanedFile.propSpawns ) do
-            --[[print(k, v)
-            PrintTable(v)]]
+    if self.referenceFile.propSpawns then
+        for k, v in pairs( self.referenceFile.propSpawns ) do
             local spawn = ents.Create("gz_lootable")
             if !IsValid(spawn) then return end
             spawn:SetPos(v.pos)
@@ -58,7 +71,7 @@ function GM:SetupMap( doCleanUp )
             local physobject = spawn:GetPhysicsObject()
             if physobject and physobject:IsValid() then physobject:EnableMotion( false ) end
 
-            if self.PropSizeTable[v.model] then
+            if self.PropTable[v.model] then
                 table.insert(self.LootablesMasterTable, spawn)
                 -- Anything else we need to do here?
                 -- Does any of it need to be done before spawning?
@@ -66,8 +79,8 @@ function GM:SetupMap( doCleanUp )
         end
     end
 
-    if self.cleanedFile.propDeletions then
-        for k, v in pairs( self.cleanedFile.Deletions ) do
+    if self.referenceFile.propDeletions then
+        for k, v in pairs( self.referenceFile.propDeletions ) do
             local entToDelete = ents.GetMapCreatedEntity( k )
             local openSesame = { func_door_rotating = true, func_door = true, prop_door_rotating = true }
 
@@ -81,9 +94,9 @@ function GM:SetupMap( doCleanUp )
         end
     end
 
-    if self.cleanedFile.Walls then
+    if self.referenceFile.Walls then
         local vector1
-        for k, v in pairs( self.cleanedFile.Walls ) do
+        for k, v in pairs( self.referenceFile.Walls ) do
             if k % 2 == 1 then
                 vector1 = Vector( v[1], v[2], v[3] )
             else

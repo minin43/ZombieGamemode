@@ -1,21 +1,24 @@
 include("shared.lua")
 
-local ent = ENT
+--local ent = ENT
 ENT.LootTable = {}
+--ENT.OpenAudio = ""
+print("cl_init.lua is being ran")
 
 net.Receive("OpenLootable", function()
-    print("received OpenLootable net message from server")
+    local ent = net.ReadEntity()
     local loot = net.ReadTable()
     ent.loot = loot
     --ENT.LootTable = loot
-
+    
     ent:OpenLootScreen(loot)
 end)
 
 net.Receive("OpenLootableSearch", function()
-    print("received OpenLootableSearch net message from server")
+    local ent = net.ReadEntity()
     local search = net.ReadInt(8)
     local loot = net.ReadTable()
+    
     ent:OpenWaitScreen()
 end)
 
