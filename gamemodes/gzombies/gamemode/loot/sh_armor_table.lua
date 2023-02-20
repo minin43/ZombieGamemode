@@ -206,53 +206,54 @@ GM.LootTable.ARMOR = {
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
-    },
-    -- Returns the name of the loot
-    GenerateRandomLoot = function()
-        -- If the armor loot table has yet to be generated, do so now
-        if !GM.LootTable.ARMOR.Generated then
-            GM.LootTable.ARMOR.GenerateRandomLootTable()
-        end
+    }
+}
 
-        -- Pull a random piece of armor from the table, return it
-        local type = GM.LootTable.Armor.DistributionTable[math.random(100)]
-        local toReturn = GM.LootTable.ARMOR.Generated[type][math.random(#GM.LootTable.ARMOR.Generated[type])].Class
-        --[[if toReturn.Type != GM.ArmorTypes.PLATE then -- Should this be a separate function?
-            if toReturn.Rarity == GM.Rarities.EXOTIC then
-                toReturn.Manufacturer = GM.FictionalArmorManufacturers.Exotic[1]
-            else
-                toReturn.Manufacturer = GM.FictionalArmorManufacturers[toReturn.Type][math.random(#GM.FictionalManufacturers[toReturn.Type])]
-            end
-        end]]
-        return toReturn
-    end,
-    GenerateLootTable = function()
-        --[[How the loot table is generated:
-            Any "common" rarity item appears in the table 6 times. As the item becomes more rare, it appears 1 fewer times.
-            A random number between 1 and the size of the table is generated to pull from it]]
-        GM.LootTable.ARMOR.DistributionTable = {}
-        local counter = 0
-        for k, v in pairs(GM.ArmorDistribution) do
-            for i = 1, v do
-                GM.LootTable.ARMOR.DistributionTable[i + counter] = k
-            end
-            counter = counter + v
+-- Returns the name of the loot
+GM.LootTable.ARMOR.GenerateRandomLoot = function()
+    -- If the armor loot table has yet to be generated, do so now
+    if !GM.LootTable.ARMOR.Generated then
+        GM.LootTable.ARMOR.GenerateRandomLootTable()
+    end
+
+    -- Pull a random piece of armor from the table, return it
+    local type = GM.LootTable.Armor.DistributionTable[math.random(100)]
+    local toReturn = GM.LootTable.ARMOR.Generated[type][math.random(#GM.LootTable.ARMOR.Generated[type])].Class
+    --[[if toReturn.Type != GM.ArmorTypes.PLATE then -- Should this be a separate function?
+        if toReturn.Rarity == GM.Rarities.EXOTIC then
+            toReturn.Manufacturer = GM.FictionalArmorManufacturers.Exotic[1]
+        else
+            toReturn.Manufacturer = GM.FictionalArmorManufacturers[toReturn.Type][math.random(#GM.FictionalManufacturers[toReturn.Type])]
         end
-        
-        GM.LootTable.ARMOR.Generated = {[GM.ArmorTypes.VEST] = {}, [GM.ArmorTypes.CARRIER] = {},
-            [GM.ArmorTypes.PLATE] = {}, [GM.ArmorTypes.HELMET] = {}, [GM.ArmorTypes.FACE] = {}}
-        for k, v in pairs(GM.LootTable.ARMOR) do
-            if istable(v) then -- Ignore functions in our search
-                local subtable = GM.LootTable.ARMOR.Generated[v.Type]
-                local tabCount = #subtable
-                for i = 1, 7 - v.Rarity do -- 7 could be replaced with the count of our rarity table + 1, but maybe any more rare and it shouldn't randomly spawn in?
-                    v.Class = k
-                    subtable[tabCount + i] = v
-                end
+    end]]
+    return toReturn
+end
+GM.LootTable.ARMOR.GenerateLootTable = function()
+    --[[How the loot table is generated:
+        Any "common" rarity item appears in the table 6 times. As the item becomes more rare, it appears 1 fewer times.
+        A random number between 1 and the size of the table is generated to pull from it]]
+    GM.LootTable.ARMOR.DistributionTable = {}
+    local counter = 0
+    for k, v in pairs(GM.ArmorDistribution) do
+        for i = 1, v do
+            GM.LootTable.ARMOR.DistributionTable[i + counter] = k
+        end
+        counter = counter + v
+    end
+    
+    GM.LootTable.ARMOR.Generated = {[GM.ArmorTypes.VEST] = {}, [GM.ArmorTypes.CARRIER] = {},
+        [GM.ArmorTypes.PLATE] = {}, [GM.ArmorTypes.HELMET] = {}, [GM.ArmorTypes.FACE] = {}}
+    for k, v in pairs(GM.LootTable.ARMOR) do
+        if istable(v) then -- Ignore functions in our search
+            local subtable = GM.LootTable.ARMOR.Generated[v.Type]
+            local tabCount = #subtable
+            for i = 1, 7 - v.Rarity do -- 7 could be replaced with the count of our rarity table + 1, but maybe any more rare and it shouldn't randomly spawn in?
+                v.Class = k
+                subtable[tabCount + i] = v
             end
         end
     end
-}
+end
 
 GM.FictionalArmorManufacturers = {
     Vest = {"Backtrack", "Altai Tactical Wear", "Spartan Armament", "Tread Gear"},

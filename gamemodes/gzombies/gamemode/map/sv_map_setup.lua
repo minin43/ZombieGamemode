@@ -131,13 +131,15 @@ function GM:SetupLoot()
                 local loot = self:GenRandomLoot()
                 -- Do we assign the fluff info here? Or later? (i.e. the manufacturer)
                 v:AddLoot(loot)
+                print("Adding loot to lootable! info:", loot)
             end
         end
     end
 end
 
-hook.Add( "InitPostEntity", "SpawnCustomProps", function()
-    timer.Simple( 3, function()
+hook.Add( "PostGamemodeInit", "Set Up Game", function()
+    timer.Simple( 0, function()
         GAMEMODE:SetupMap()
+        GAMEMODE:SetupLoot()
     end )
 end )

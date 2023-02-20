@@ -17,8 +17,8 @@ util.AddNetworkString("PlayerChatColor")
 
 local Ply = FindMetaTable("Player")
 function Ply:AddScore(score)
-	local num = self:GetNWInt("tdm_score")
-	self:SetNWInt("tdm_score", num + score)
+	local num = self:GetNWInt("gz_score")
+	self:SetNWInt("gz_score", num + score)
 end
 
 function Ply:SendSound(dir)
