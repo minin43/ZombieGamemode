@@ -36,6 +36,10 @@ function GM:GetGameState()
 	end
 end
 
+function GM:ConsolePrint(text)
+	print("[gZ] " .. text)
+end
+
 local _PLY = FindMetaTable("Player")
 
 function _PLY:Score()
@@ -60,3 +64,27 @@ GM.Rarities = {
     [5] = {Color = Color(252, 57, 3)}, --//Red-Orange
     [6] = {Color = Color(0, 255, 255)} --//Cyan
 }
+
+GM.Rarities.GenerateRandomRarity = function()
+	GM.Rarities.RarityTable = GM.Rarities.RarityTable or {}
+
+	if table.IsEmpty(GM.Rarities.RarityTable) then
+		for i = 1, 64 do
+			if i < 34 then
+				GM.Rarities.RarityTable[i] = GM.Rarities[1]
+			else if i < 50 then
+				GM.Rarities.RarityTable[i] = GM.Rarities[2]
+			else if i < 58 then
+				GM.Rarities.RarityTable[i] = GM.Rarities[3]
+			else if i < 62 then
+				GM.Rarities.RarityTable[i] = GM.Rarities[4]
+			else if i < 64 then
+				GM.Rarities.RarityTable[i] = GM.Rarities[5]
+			else if i < 65 then
+				GM.Rarities.RarityTable[i] = GM.Rarities[6]
+			end
+		end
+	end
+
+	return GM.Rarities.RarityTable[math.random(#GM.Rarities.RarityTable)]
+end

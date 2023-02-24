@@ -60,7 +60,7 @@ GM.LootDistributionSetup = {
     RESOURCES = 40
 }
 
-GM.WeaponDistributions = {
+GM.WeaponDistribution = {
     [GM.WeaponTypes.GUN] = 55,
     [GM.WeaponTypes.ATTACH] = 15,
     [GM.WeaponTypes.MELEE] = 30
@@ -86,15 +86,6 @@ GM.ResourceDistribution = {
     [GM.ResourceTypes.RAW] = 40,
     [GM.ResourceTypes.MEDS] = 25
 }
-
-GM.LootDistribution = {} -- We'll use a distribution table instead of any other method, because I guess I don't know what other method would work
-local counter = 0
-for k, v in pairs(GM.LootDistributionSetup) do
-    for i = 1, v do
-        GM.LootDistribution[i + counter] = k
-    end
-    counter = counter + v
-end
 
 -- Non-numeric Enumerations
 
