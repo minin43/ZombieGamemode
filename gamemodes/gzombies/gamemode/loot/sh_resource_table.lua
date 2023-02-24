@@ -1,4 +1,6 @@
-GM.LootTable.RESOURCES = {
+GM.LootTable.RESOURCES = GM.LootTable.RESOURCES or {}
+
+GM.LootTable.RESOURCES.Ammo = {
     -- Bullet calibers
     ["12 Gauge"] = {
 
@@ -44,8 +46,10 @@ GM.LootTable.RESOURCES = {
     },
     ["9x39MM"] = {
 
-    },
+    }
+}
 
+GM.LootTable.RESOURCES.Magazines = {
     -- Magazines for each weapon
     STANAGmag = {
         Name = "STANAG Magazine",
@@ -200,8 +204,41 @@ GM.LootTable.RESOURCES = {
         Size = 0,
         Icon = "",
         --Model = GM.MagazineModels.
-    },
+    }
+}
 
+GM.LootTable.RESOURCES.Resources = {
+    Wood = {
+
+    },
+    Cloth = {
+
+    },
+    Metal = {
+
+    }
+}
+
+GM.LootTable.RESOURCES.Medical = {
+    Bandage = {
+
+    },
+    Splint = {
+
+    },
+    Tourniquet = {
+
+    },
+    Morphine = {
+
+    },
+    ["Surgical Kit"] = {
+
+    },
+    ["Personal Aid Kit"] = {
+
+    }
+}
     -- Raw resources - what raw resources would it make sense to even care about?
     --[[Wood
     Cloth
@@ -236,4 +273,3 @@ GM.LootTable.RESOURCES = {
             - Cut                           Cut
             - Bludgeon                      Crush + Contusion
     ]]
-}

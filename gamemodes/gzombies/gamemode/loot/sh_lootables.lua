@@ -52,3 +52,9 @@ if SERVER then
         return self.LootTable[self.LootDistribution[math.random(100)]].GenerateRandomLoot()
     end
 end
+
+--[[
+    Explanation on how generating Loot will work:
+        There's 4 types of loot: Armor, Weapons, Resources, and Tools. Each loot type has sub-categories (Weapons -> Guns, Armor -> Helmets, etc).
+        
+]]
