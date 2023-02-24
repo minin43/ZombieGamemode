@@ -1,4 +1,6 @@
-GM.LootTable.ARMOR = {
+GM.LootTable.ARMOR = GM.LootTable.ARMOR or {}
+
+GM.LootTable.ARMOR.VEST = {
     --[[
         -- Level = Protection level, higher better, attempts to mirror real-life ballistic protection
         -- Dispersal = Energy absorption, 1 transfering 90% damage, 10 transfering 0% damage, higher better
@@ -67,7 +69,10 @@ GM.LootTable.ARMOR = {
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
-    },
+    }
+}
+
+GM.LootTable.ARMOR.PLATE = {
     --[[
         -- Level = Protection level, higher better, mirrors real-life ballistic protection
         -- Dispersal = Energy absorption, 1 transfering 90% damage, 10 transfering 0% damage, higher better
@@ -80,7 +85,6 @@ GM.LootTable.ARMOR = {
         -- Bulk = Armor Size, ?-?, how much it affects mouse sensitivity, cw2 weapons have a value baked in
         -- PenResist = Penetration, 0-20%, how much energy is absorbed on a shot that penetrates, armor degredation amount on pen is ContDurability * 2 - PenResist
     ]]
-    -- Plates
     WOOD = {
         Name = "Wood Block",
         Type = GM.ArmorTypes.PLATE,
@@ -209,51 +213,177 @@ GM.LootTable.ARMOR = {
     }
 }
 
--- Returns the name of the loot
-GM.LootTable.ARMOR.GenerateRandomLoot = function()
-    -- If the armor loot table has yet to be generated, do so now
-    if !GM.LootTable.ARMOR.Generated then
-        GM.LootTable.ARMOR.GenerateRandomLootTable()
-    end
+GM.LootTable.ARMOR.CARRIER = {
+    --[[
+        -- Vest - if a Vest is part of the carrier, bring its table in here
+        -- Rarity
+        -- Front plate
+        -- Back plate
+        -- Weight
+        -- Bulk
+        -- type
+    ]]
+    PlateCarrier = {
+        Name = "Plate Carrier",
+        Type = GM.ArmorTypes.CARRIER,
+        Vest = nil,
+        FrontPlate = nil,
+        BackPlate = nil,
+        Rarity = 0,
+        Weight = 0,
+        Bulk = 0
+    },
+    LightPlateCarrier = {
+        Name = "Light Plate Carrier",
+        Type = GM.ArmorTypes.CARRIER,
+        Vest = nil,
+        FrontPlate = nil,
+        BackPlate = nil,
+        Rarity = 0,
+        Weight = 0,
+        Bulk = 0
+    },
+    ChestRig = {
+        Name = "Chest Rig",
+        Type = GM.ArmorTypes.CARRIER,
+        Vest = nil,
+        FrontPlate = nil,
+        BackPlate = nil,
+        Rarity = 0,
+        Weight = 0,
+        Bulk = 0
+    },
+    HeavyChestRig = {
+        Name = "Heavy Chest Rig",
+        Type = GM.ArmorTypes.CARRIER,
+        Vest = nil,
+        FrontPlate = nil,
+        BackPlate = nil,
+        Rarity = 0,
+        Weight = 0,
+        Bulk = 0
+    },
+    ArmoredRig = {
+        Name = "Armored Chest Rig",
+        Type = GM.ArmorTypes.CARRIER,
+        Vest = nil,
+        FrontPlate = nil,
+        BackPlate = nil,
+        Rarity = 0,
+        Weight = 0,
+        Bulk = 0
+    },
+    HeavyArmoredRig = {
+        Name = "Heavy Armored Chest Rig",
+        Type = GM.ArmorTypes.CARRIER,
+        Vest = nil,
+        FrontPlate = nil,
+        BackPlate = nil,
+        Rarity = 0,
+        Weight = 0,
+        Bulk = 0
+    },
+    ArmoredHeavyRig = {
+        Name = "Armored Heavy Chest Rig",
+        Type = GM.ArmorTypes.CARRIER,
+        Vest = nil,
+        FrontPlate = nil,
+        BackPlate = nil,
+        Rarity = 0,
+        Weight = 0,
+        Bulk = 0
+    },
+}
 
-    -- Pull a random piece of armor from the table, return it
-    local type = GM.LootTable.Armor.DistributionTable[math.random(100)]
-    local toReturn = GM.LootTable.ARMOR.Generated[type][math.random(#GM.LootTable.ARMOR.Generated[type])].Class
-    --[[if toReturn.Type != GM.ArmorTypes.PLATE then -- Should this be a separate function?
-        if toReturn.Rarity == GM.Rarities.EXOTIC then
-            toReturn.Manufacturer = GM.FictionalArmorManufacturers.Exotic[1]
-        else
-            toReturn.Manufacturer = GM.FictionalArmorManufacturers[toReturn.Type][math.random(#GM.FictionalManufacturers[toReturn.Type])]
-        end
-    end]]
-    return toReturn
-end
-GM.LootTable.ARMOR.GenerateLootTable = function()
-    --[[How the loot table is generated:
-        Any "common" rarity item appears in the table 6 times. As the item becomes more rare, it appears 1 fewer times.
-        A random number between 1 and the size of the table is generated to pull from it]]
-    GM.LootTable.ARMOR.DistributionTable = {}
-    local counter = 0
-    for k, v in pairs(GM.ArmorDistribution) do
-        for i = 1, v do
-            GM.LootTable.ARMOR.DistributionTable[i + counter] = k
-        end
-        counter = counter + v
-    end
-    
-    GM.LootTable.ARMOR.Generated = {[GM.ArmorTypes.VEST] = {}, [GM.ArmorTypes.CARRIER] = {},
-        [GM.ArmorTypes.PLATE] = {}, [GM.ArmorTypes.HELMET] = {}, [GM.ArmorTypes.FACE] = {}}
-    for k, v in pairs(GM.LootTable.ARMOR) do
-        if istable(v) then -- Ignore functions in our search
-            local subtable = GM.LootTable.ARMOR.Generated[v.Type]
-            local tabCount = #subtable
-            for i = 1, 7 - v.Rarity do -- 7 could be replaced with the count of our rarity table + 1, but maybe any more rare and it shouldn't randomly spawn in?
-                v.Class = k
-                subtable[tabCount + i] = v
-            end
-        end
-    end
-end
+GM.LootTable.ARMOR.HELMET = {
+    --[[
+        -- Name
+        -- Type
+        -- Level = Protection level, higher better, mirrors real-life ballistic protection
+        -- Dispersal = Energy absorption, 1 transfering 90% damage, 10 transfering 0% damage, higher better
+        -- FSDurability = First-Shot Durability, how many shots of at-level fire before integrity begins decreasing
+        -- ContDurability = Continuous Durability, how much integrity decreases per at-level shot after FSDurability
+        -- Integrity = Armor health, active %, chance of at-level fire deflecting on armor
+        -- Weight = How much carrying/equipping armor influences stamina
+        -- Rarity = Cost (1-6, 1 being "common")
+        -- ExpResist = Explosion Resistance, 0-100%
+        -- Bulk = Armor Size, ?-?, how much it affects mouse sensitivity, cw2 weapons have a value baked in
+        -- PenResist = Penetration, 0-20%, how much energy is absorbed on a shot that penetrates, armor degredation amount on pen is ContDurability * 2 - PenResist
+    ]]
+    Riot = {
+        Name = "Riot Helmet",
+        Type = GM.ArmorTypes.HELMET,
+        Level = GM.ArmorLevels.IIA,
+        Dispersal = 1,
+        FSDurability = 8,
+        ContDurability = 12,
+        Integrity = 100,
+        Weight = 0,
+        Rarity = GM.Rarities.COMMON,
+        ExpResist = 15,
+        Bulk = 0,
+        PenResist = 5
+    },
+    Tactical = {
+        Name = "Tactical Helmet",
+        Type = GM.ArmorTypes.HELMET,
+        Level = GM.ArmorLevels.II,
+        Dispersal = 1,
+        FSDurability = 8,
+        ContDurability = 12,
+        Integrity = 100,
+        Weight = 0,
+        Rarity = GM.Rarities.COMMON,
+        ExpResist = 15,
+        Bulk = 0,
+        PenResist = 5
+    },
+    Combat = {
+        Name = "Combat Helmet",
+        Type = GM.ArmorTypes.HELMET,
+        Level = GM.ArmorLevels.IIIA,
+        Dispersal = 1,
+        FSDurability = 8,
+        ContDurability = 12,
+        Integrity = 100,
+        Weight = 0,
+        Rarity = GM.Rarities.COMMON,
+        ExpResist = 15,
+        Bulk = 0,
+        PenResist = 5
+    },
+    Ballistic = {
+        Name = "Ballistic Helmet",
+        Type = GM.ArmorTypes.HELMET,
+        Level = GM.ArmorLevels.III,
+        Dispersal = 1,
+        FSDurability = 8,
+        ContDurability = 12,
+        Integrity = 100,
+        Weight = 0,
+        Rarity = GM.Rarities.COMMON,
+        ExpResist = 15,
+        Bulk = 0,
+        PenResist = 5
+    },
+}
+
+GM.LootTable.ARMOR.FACE = {
+    --[[
+        -- Name
+        -- Type
+        -- Rarity
+        -- Weight
+        -- Bulk
+    ]]
+    Sunglasses = {
+        Name = "Sunglasses",
+        Type = GM.ArmorTypes.FACE,
+        Rarity = 0,
+        Weight = 0,
+        Bulk = 0
+    }
+}
 
 GM.FictionalArmorManufacturers = {
     Vest = {"Backtrack", "Altai Tactical Wear", "Spartan Armament", "Tread Gear"},
@@ -263,18 +393,26 @@ GM.FictionalArmorManufacturers = {
 
 --[[
     Armor:
+    Vests
+        Listed Above
+    Carriers
+        Plate Carrier (front/back)
+        Light Player Carrier (front/back)
+        Chest Rig (front/back) (extra magazine slots)
+        Heavy Chest Rig (front/back) (2x extra magazine slots)
+        Armored Rig (front/back) (extra magazine slots) (includes lighter kevlar body armor)
+        Heavy Armored Rig (front/back) (extra magazine slots) (includes heavy kevlar body armor)
+        Armored Heavy Chest Rig (front/back) (2x extra magazine slots) (includes lighter kevlar body armor)
+    Plates
+        Listed Above
     Head
-        Ballistic Helmets
-        Cap
-        Tuque
+        Riot Helmet (IIA)
+        Tactical Helmet (II)
+        Combat Helmet (IIIA)
+        Ballistic Helmet (III)
     Face
-        Ballistic Mask
-        Gas Masks
-        Sunglasses
-    Chest
-        Bullet-resistant vests
-        Plate carriers
-        Chest Rigs
+        Sunglasses (reduce flashbang blind duration)
+        Gas Mask (prevent coughing from smoke)
 
     Shot Profiles:
         9mm out of pistol barrel: level 1
