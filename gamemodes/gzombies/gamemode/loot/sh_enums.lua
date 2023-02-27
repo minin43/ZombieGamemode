@@ -1,5 +1,5 @@
 -- Enumerations
-print("Logan Debug")
+
 GM.LootType = {
     BASE = 0, -- Nothing found while playing should have this type
     GEAR = 10,
@@ -22,6 +22,7 @@ GM.ArmorTypes = {
     PLATE = 3,
     HELMET = 4,
     FACE = 5
+    --Backpacks???
 }
 
 GM.WeaponTypes = {
@@ -61,30 +62,30 @@ GM.LootDistributionSetup = {
 }
 
 GM.WeaponDistribution = {
-    [GM.WeaponTypes.GUN] = 55,
-    [GM.WeaponTypes.ATTACH] = 15,
-    [GM.WeaponTypes.MELEE] = 30
+    GUN = 55,
+    ATTACH = 15,
+    MELEE = 30
 }
 
 GM.ToolsDistribution = {
-    [GM.ToolTypes.BUILD] = 33,
-    [GM.ToolTypes.HARVEST] = 33,
-    [GM.ToolTypes.LIGHT] = 34
+    BUILD = 33,
+    HARVEST = 33,
+    LIGHT = 34
 }
 
 GM.ArmorDistribution = {
-    [GM.ArmorTypes.VEST] = 20,
-    [GM.ArmorTypes.CARRIER] = 20,
-    [GM.ArmorTypes.PLATE] = 20,
-    [GM.ArmorTypes.HELMET] = 20,
-    [GM.ArmorTypes.FACE] = 20
+    VEST = 20,
+    CARRIER = 20,
+    PLATE = 20,
+    HELMET = 20,
+    FACE = 20
 }
 
 GM.ResourceDistribution = {
-    [GM.ResourceTypes.BULLETS] = 20,
-    [GM.ResourceTypes.MAGS] = 15,
-    [GM.ResourceTypes.RAW] = 40,
-    [GM.ResourceTypes.MEDS] = 25
+    BULLETS = 20,
+    MAGS = 15,
+    RAW = 40,
+    MEDS = 25
 }
 
 -- Non-numeric Enumerations

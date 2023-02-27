@@ -47,9 +47,10 @@ if SERVER then
     function GM:GenerateRandomLoot()
         local lootType = self.LootDistribution[math.random(100)]
         local lootSubType = self.LootDistribution[lootType][math.random(100)]
-        local tblLength = self.LootDistribution[lootType][lootSubType].Generated.Count
-
-        return table.Copy(self.LootTable[lootType][lootSubType].Generated[math.random(tblLength)])
+        local tblLength = self.LootTable[lootType][lootSubType].Generated.Count
+        local selectedLoot = self.LootTable[lootType][lootSubType].Generated[math.random(tblLength)]
+        print("GenerateRandomLoot called, SelectedLoot: ", selectedLoot)
+        return table.Copy(self.LootTable[lootType][lootSubType][selectedLoot])
     end
 
     GM:ConsolePrint("Generating Loot Distribution tables")
@@ -59,43 +60,43 @@ if SERVER then
         for i = 1, v do
             GM.LootDistribution[i + counter] = k
         end
-        counter = counter + 1
+        counter = counter + v
     end
 
-    GM.LootDistribution.Weapon = {}
+    GM.LootDistribution.WEAPONS = {}
     counter = 0
     for k, v in pairs(GM.WeaponDistribution) do
         for i = 1, v do
-            GM.LootDistribution.Weapon[i + counter] = k
+            GM.LootDistribution.WEAPONS[i + counter] = k
         end
-        counter = counter + 1
+        counter = counter + v
     end
 
-    GM.LootDistribution.Armor = {}
+    GM.LootDistribution.ARMOR = {}
     counter = 0
     for k, v in pairs(GM.ArmorDistribution) do
         for i = 1, v do
-            GM.LootDistribution.Armor[i + counter] = k
+            GM.LootDistribution.ARMOR[i + counter] = k
         end
-        counter = counter + 1
+        counter = counter + v
     end
 
-    GM.LootDistribution.Tool = {}
+    GM.LootDistribution.TOOLS = {}
     counter = 0
     for k, v in pairs(GM.ToolsDistribution) do
         for i = 1, v do
-            GM.LootDistribution.Tool[i + counter] = k
+            GM.LootDistribution.TOOLS[i + counter] = k
         end
-        counter = counter + 1
+        counter = counter + v
     end
 
-    GM.LootDistribution.Resource = {}
+    GM.LootDistribution.RESOURCES = {}
     counter = 0
     for k, v in pairs(GM.ResourceDistribution) do
         for i = 1, v do
-            GM.LootDistribution.REsource[i + counter] = k
+            GM.LootDistribution.RESOURCES[i + counter] = k
         end
-        counter = counter + 1
+        counter = counter + v
     end
 
     GM:ConsolePrint("Generating Loot Master tables")
@@ -104,17 +105,15 @@ if SERVER then
             GM.LootTable[lootType][lootSubType].Generated = { Count = 0 }
 
             for loot, lootData in pairs(subTbl) do
-                for i = 1, 7 - lootData.Rarity do
-                    table.insert(GM.LootTable[lootType][subtype].Generated, loot)
-                    GM.LootTable.[lootType][subtype].Generated.Count = GM.LootTable.[lootType][subtype].Generated.Count + 1
+                if loot != "Generated" and lootData.Rarity and lootData.Rarity > 0 and lootData.Rarity < 7 then --These </> checks probably go away after the loot table is done
+                    for i = 1, 7 - lootData.Rarity do
+                        table.insert(GM.LootTable[lootType][lootSubType].Generated, loot)
+                        GM.LootTable[lootType][lootSubType].Generated.Count = GM.LootTable[lootType][lootSubType].Generated.Count + 1
+                    end
                 end
             end
+            --print("Table for ", lootType, lootSubType)
+            --PrintTable(GM.LootTable[lootType][lootSubType].Generated)
         end
     end
 end
-
---[[
-    Explanation on how generating Loot will work:
-        There's 4 types of loot: Armor, Weapons, Resources, and Tools. Each loot type has sub-categories (Weapons -> Guns, Armor -> Helmets, etc).
-        
-]]

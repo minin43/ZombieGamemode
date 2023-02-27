@@ -12,24 +12,24 @@ function IncludeNewFile( fileName, directory )
     if sepFileName[1] == "sv" then
         if SERVER then 
             include( toUse )
-            GAMEMODE:ConsolePrint("Including new file: " .. fileName, directory)
+            GM:ConsolePrint("Including new file: " .. fileName, directory)
         end
     elseif sepFileName[1] == "sh" then
         if SERVER then 
             include( toUse )
             AddCSLuaFile( toUse )
-            GAMEMODE:ConsolePrint("Including new file: " .. fileName, directory)
+            GM:ConsolePrint("Including new file: " .. fileName, directory)
         else
             include( toUse )
-            GAMEMODE:ConsolePrint("Including new file: " .. fileName, directory)
+            GM:ConsolePrint("Including new file: " .. fileName, directory)
         end
     elseif sepFileName[1] == "cl" then
         if SERVER then
             AddCSLuaFile( toUse )
-            GAMEMODE:ConsolePrint("Sending file to client: " .. fileName, directory)
+            GM:ConsolePrint("Sending file to client: " .. fileName, directory)
         else
             include( toUse )
-            GAMEMODE:ConsolePrint("Including new file: " .. fileName, directory)
+            GM:ConsolePrint("Including new file: " .. fileName, directory)
         end
     end
 end
@@ -61,4 +61,4 @@ for k, directoryName in pairs( gamemodeDirectories ) do
     end
 end
 
-GAMEMODE:ConsolePrint("Done loading files")
+GM:ConsolePrint("Done loading files")

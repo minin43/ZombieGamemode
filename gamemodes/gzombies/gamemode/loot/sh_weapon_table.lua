@@ -1,6 +1,6 @@
 GM.LootTable.WEAPONS = GM.LootTable.WEAPONS or {}
 
-GM.LootTable.WEAPONS.Guns = {
+GM.LootTable.WEAPONS.GUN = {
     -- Weapons
     gz_ar15 = {
         Base = "cw_ar15",
@@ -220,7 +220,7 @@ GM.LootTable.WEAPONS.Guns = {
     }
 }
 
-GM.LootTable.WEAPONS.Attachments = {
+GM.LootTable.WEAPONS.ATTACH = {
     -- General Attachments, can be hot-swapped
     --[[gz_kobra = {
         Base = "",
@@ -293,7 +293,7 @@ GM.LootTable.WEAPONS.Attachments = {
     ]]
 }
 
-GM.LootTable.WEAPONS.Melee = {
+GM.LootTable.WEAPONS.MELEE = {
     -- Melee
     --gz_knife -- Probably the only one?
 }

@@ -72,15 +72,15 @@ GM.Rarities.GenerateRandomRarity = function()
 		for i = 1, 64 do
 			if i < 34 then
 				GM.Rarities.RarityTable[i] = GM.Rarities[1]
-			else if i < 50 then
+			elseif i < 50 then
 				GM.Rarities.RarityTable[i] = GM.Rarities[2]
-			else if i < 58 then
+			elseif i < 58 then
 				GM.Rarities.RarityTable[i] = GM.Rarities[3]
-			else if i < 62 then
+			elseif i < 62 then
 				GM.Rarities.RarityTable[i] = GM.Rarities[4]
-			else if i < 64 then
+			elseif i < 64 then
 				GM.Rarities.RarityTable[i] = GM.Rarities[5]
-			else if i < 65 then
+			elseif i < 65 then
 				GM.Rarities.RarityTable[i] = GM.Rarities[6]
 			end
 		end

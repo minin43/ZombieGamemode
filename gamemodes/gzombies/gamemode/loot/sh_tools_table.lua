@@ -1,13 +1,13 @@
 GM.LootTable.TOOLS = GM.LootTable.TOOLS or {}
 
-GM.LootTable.TOOLS.Building = {
+GM.LootTable.TOOLS.BUILD = {
     
 }
 
-GM.LootTable.TOOLS.Harvesting = {
+GM.LootTable.TOOLS.HARVEST = {
 
 }
 
-GM.LootTable.TOOLS.Light = {
+GM.LootTable.TOOLS.LIGHT = {
     
 }

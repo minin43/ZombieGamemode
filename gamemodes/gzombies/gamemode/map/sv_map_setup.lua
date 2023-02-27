@@ -128,7 +128,7 @@ function GM:SetupLoot()
         for i = 1, v.Size do
             local doSpawn = (math.random(i * 2) == 1) -- Each additional spot has 1/2 chance of previous to spawn something in
             if doSpawn then
-                local loot = self:GenRandomLoot()
+                local loot = self:GenerateRandomLoot()
                 -- Do we assign the fluff info here? Or later? (i.e. the manufacturer)
                 v:AddLoot(loot)
                 print("Adding loot to lootable! info:", loot)

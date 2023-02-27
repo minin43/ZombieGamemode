@@ -23,7 +23,7 @@ GM.LootTable.ARMOR.VEST = {
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = 1,
+        Rarity = GM.Rarity.COMMON,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
@@ -37,7 +37,7 @@ GM.LootTable.ARMOR.VEST = {
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = 2,
+        Rarity = GM.Rarity.UNCOMMON,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
@@ -51,7 +51,7 @@ GM.LootTable.ARMOR.VEST = {
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = 2,
+        Rarity = GM.Rarity.UNCOMMON,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
@@ -65,7 +65,7 @@ GM.LootTable.ARMOR.VEST = {
         ContDurability = 0,
         Integrity = 0,
         Weight = 0,
-        Rarity = 5,
+        Rarity = GM.Rarity.LEGENDARY,
         ExpResist = 0,
         Bulk = 0,
         PenResist = 0
@@ -229,7 +229,7 @@ GM.LootTable.ARMOR.CARRIER = {
         Vest = nil,
         FrontPlate = nil,
         BackPlate = nil,
-        Rarity = 0,
+        Rarity = GM.Rarities.COMMON,
         Weight = 0,
         Bulk = 0
     },
@@ -239,7 +239,7 @@ GM.LootTable.ARMOR.CARRIER = {
         Vest = nil,
         FrontPlate = nil,
         BackPlate = nil,
-        Rarity = 0,
+        Rarity = GM.Rarities.COMMON,
         Weight = 0,
         Bulk = 0
     },
@@ -249,7 +249,7 @@ GM.LootTable.ARMOR.CARRIER = {
         Vest = nil,
         FrontPlate = nil,
         BackPlate = nil,
-        Rarity = 0,
+        Rarity = GM.Rarities.COMMON,
         Weight = 0,
         Bulk = 0
     },
@@ -259,7 +259,7 @@ GM.LootTable.ARMOR.CARRIER = {
         Vest = nil,
         FrontPlate = nil,
         BackPlate = nil,
-        Rarity = 0,
+        Rarity = GM.Rarities.COMMON,
         Weight = 0,
         Bulk = 0
     },
@@ -269,7 +269,7 @@ GM.LootTable.ARMOR.CARRIER = {
         Vest = nil,
         FrontPlate = nil,
         BackPlate = nil,
-        Rarity = 0,
+        Rarity = GM.Rarities.COMMON,
         Weight = 0,
         Bulk = 0
     },
@@ -279,7 +279,7 @@ GM.LootTable.ARMOR.CARRIER = {
         Vest = nil,
         FrontPlate = nil,
         BackPlate = nil,
-        Rarity = 0,
+        Rarity = GM.Rarities.COMMON,
         Weight = 0,
         Bulk = 0
     },
@@ -289,7 +289,7 @@ GM.LootTable.ARMOR.CARRIER = {
         Vest = nil,
         FrontPlate = nil,
         BackPlate = nil,
-        Rarity = 0,
+        Rarity = GM.Rarities.COMMON,
         Weight = 0,
         Bulk = 0
     },
@@ -365,7 +365,7 @@ GM.LootTable.ARMOR.HELMET = {
         ExpResist = 15,
         Bulk = 0,
         PenResist = 5
-    },
+    }
 }
 
 GM.LootTable.ARMOR.FACE = {
@@ -379,7 +379,14 @@ GM.LootTable.ARMOR.FACE = {
     Sunglasses = {
         Name = "Sunglasses",
         Type = GM.ArmorTypes.FACE,
-        Rarity = 0,
+        Rarity = GM.Rarities.COMMON,
+        Weight = 0,
+        Bulk = 0
+    },
+    GasMask = {
+        Name = "Gas Mask",
+        Type = GM.ArmorTypes.FACE,
+        Rarity = GM.Rarities.UNCOMMON,
         Weight = 0,
         Bulk = 0
     }

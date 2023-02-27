@@ -30,6 +30,7 @@ hook.Add("InitPostEntity", "Weapon Balance Changes", function()
                 if istable(val) then
                     for subStat, subVal in pairs(val) do
                         print(subStat, subVal, val, statTable)
+                        PrintTable(statTable)
                         statTable[val][subStat] = subVal
                     end
                 else
