@@ -31,7 +31,7 @@ end
 
 --//Set up or verify the loot tables (armor, weapons, resources, etc)
 --//If we run into new items, add them to sql db, if we've deleted them, relfect that too
-for k, v in pairs(GM.LootTable) do
+--[[for k, v in pairs(GM.LootTable) do
     if istable(v) then
         local name = "gz_" .. k
 
@@ -42,4 +42,4 @@ for k, v in pairs(GM.LootTable) do
             GM:VerifyDBTable(name, v)
         end
     end
-end
+end]]

@@ -29,14 +29,16 @@ end
 function ENT:OpenLootScreen()
     if GAMEMODE.InteractScreen then return end
 
+    GAMEMODE:OpenInventory()
     surface.PlaySound(self.OpenAudio)
 
-    print("lootable attempt open screen")
+    local frameWidth = ScrW() / 2
+    local frameHeight = ScrH()
     -- Future work
     local frame = vgui.Create("DFrame")
     GAMEMODE.InteractScreen = frame
-    frame:SetSize(400, 400)
-    frame:Center()
+    frame:SetSize(frameWidth, frameHeight)
+    frame:SetPos(frameWidth, 0)
     frame:SetTitle("Loot")
     frame:SetVisible(true)
     frame:ShowCloseButton(true)
