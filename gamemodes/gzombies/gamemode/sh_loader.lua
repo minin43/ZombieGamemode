@@ -34,23 +34,27 @@ function IncludeNewFile( fileName, directory )
     end
 end
 
---//Custom hooks
---[[if SERVER then
-    include( "gzombies/gamemode/custom/sv_custom.lua" )
-    include( "gzombies/gamemode/custom/sh_custom.lua" )
-
-    AddCSLuaFile( "gzombies/gamemode/custom/sh_custom.lua" )
-    AddCSLuaFile( "gzombies/gamemode/custom/cl_custom.lua" )
-else
-    include( "gzombies/gamemode/custom/sh_custom.lua" )
-    include( "gzombies/gamemode/custom/cl_custom.lua" )
-end]]
-
 local _, gamemodeDirectories = file.Find( "gzombies/gamemode/*", "LUA" )
 for k, directoryName in pairs( gamemodeDirectories ) do
     if !SkipLoad[ directoryName ] then
-        local str = "gzombies/gamemode/" .. directoryName .. "/sh_load_order.lua"
-        if file.Exists(str, "LUA") then
+        local loadOrderFile = "gzombies/gamemode/" .. directoryName .. "/sh_load_order.lua"
+        local svInitFile = "gzombies/gamemode/" .. directoryName .. "/sv" .. directoryName .. "_init.lua"
+        local clInitFile = "gzombies/gamemode/" .. directoryName .. "/cl" .. directoryName .. "_init.lua"
+        local shInitFile = "gzombies/gamemode/" .. directoryName .. "/sh" .. directoryName .. "_init.lua"
+
+        if file.Exists(shInitFile, "LUA") then
+            IncludeNewFile("/sh" .. directoryName .. "_init.lua", "gzombies/gamemode/" .. directoryName)
+        end
+
+        if file.Exists(svInitFile, "LUA") then
+            IncludeNewFile("/sv" .. directoryName .. "_init.lua", "gzombies/gamemode/" .. directoryName)
+        end
+
+        if file.Exists(clInitFile, "LUA") then
+            IncludeNewFile("/cl" .. directoryName .. "_init.lua", "gzombies/gamemode/" .. directoryName)
+        end
+
+        if file.Exists(loadOrderFile, "LUA") then
             IncludeNewFile("sh_load_order.lua", "gzombies/gamemode/" .. directoryName)
         else
             local files, _ = file.Find( "gzombies/gamemode/" .. directoryName .. "/*", "LUA" )

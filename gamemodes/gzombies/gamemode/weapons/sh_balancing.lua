@@ -25,16 +25,16 @@ GM.WeaponStats = {
 
 hook.Add("InitPostEntity", "Weapon Balance Changes", function()
     for class, statTable in pairs(GAMEMODE.WeaponStats) do
-        if weapons.GetStored(class) then
+        local wep = weapons.GetStored(class)
+        
+        if wep and IsValid(wep) then
             for stat, val in pairs(statTable) do
                 if istable(val) then
                     for subStat, subVal in pairs(val) do
-                        print(subStat, subVal, val, statTable)
-                        PrintTable(statTable)
-                        statTable[val][subStat] = subVal
+                        wep[val][subStat] = subVal
                     end
                 else
-                    statTable[stat] = val
+                    wep[stat] = val
                 end
             end
         end

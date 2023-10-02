@@ -5,65 +5,9 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("sh_loader.lua")
 
-GM.PreventFallDamage = false
-GM.DefaultWalkSpeed = 150 -- or "max", min is 100
-GM.DefaultRunSpeed = 220 -- or "max", min is 170 (unless we add modifiers to affect that later?)
-GM.DefaultJumpPower = 150 -- or "max", matches walk speed
-GM.TimePassed = 0
-GM.Players = {}
-
 util.AddNetworkString("SendSingleSound")
-util.AddNetworkString("PlayerChatColor")
 
-local Ply = FindMetaTable("Player")
-function Ply:AddScore(score)
-	local num = self:GetNWInt("gz_score")
-	self:SetNWInt("gz_score", num + score)
-end
-
-function Ply:SendSound(dir)
-    net.Start("SendSingleSound")
-        net.WriteString(dir)
-    net.Send(self)
-end
-
-function BroadcastSound(dir)
-    net.Start("SendSingleSound")
-        net.WriteString(dir)
-    net.Broadcast()
-end
-
-function Ply:ChatPrintColor(...)
-	local args = { ... }
-    local tab = {}
-    
-    for k, v in pairs(args) do
-        --//We can be sent tables
-        if istable(v) and !IsColor(v) then
-            --//Only numerically-indexed tables
-            for k2, v2 in ipairs(v) do
-                --//If there are multiple items in the table, add a comma to the end of all except the last
-                if k2 == #v then
-                    tab[#tab + 1] = v2
-                else
-                    tab[#tab + 1] = v2 .. ", "
-                end
-            end
-        else
-            tab[#tab + 1] = v
-        end
-    end
-    
-	net.Start("PlayerChatColor")
-		net.WriteTable(tab)
-	net.Send(self)
-end
-
-function GlobalChatPrintColor(...)
-    for k, v in pairs(player.GetAll()) do
-        v:ChatPrintColor(...)
-    end
-end
+GM.PreventFallDamage = false
 
 if not file.Exists("gz", "DATA") then
 	file.CreateDir("gz")
@@ -74,6 +18,8 @@ if not file.Exists("gz/users", "DATA") then
 end
 
 function GM:Initialize()
+	--Before the startup work has been done
+	hook.Call("PreGamemodeInit", self)
 	--[[
 		- Set up map (player spawns, zombie spawns, storage locations, anything else)
 		- Set up any edited globals
@@ -81,10 +27,9 @@ function GM:Initialize()
 	]]
 	--self:SetupMap()
 
-	timer.Create("GameTimer", 1, 0, function()
-		GAMEMODE.TimePassed = GAMEMODE.TimePassed + 1
-	end)
+	self:GameStart()
 
+	--After the startup and round work has been done
 	hook.Call("PostGamemodeInit", self)
 end
 
@@ -132,6 +77,8 @@ function GM:PlayerInitialSpawn(ply)
 	--ply:ConCommand("cl_deathview 1")
 	ply:SetTeam(0)
 	--ply:Spectate(OBS_MODE_CHASE)
+
+	self:AddNewPlayerToReadyList(ply)
 end
 
 function GM:PlayerSpawn(ply, firstSpawn)
@@ -149,7 +96,7 @@ end
 
 function GM:PlayerSetModel( ply )
 	ply:SetModel( "models/player/odessa.mdl" )
- end
+end
 
 function GM:PlayerDeathSound()
 	return true
@@ -158,6 +105,7 @@ end
 function GM:PlayerDisconnected(ply)
 	GlobalChatPrintColor(Color(255, 255, 255), "Player ", Color(76, 175, 80), ply:Nick(), Color(255, 255, 255), " has disconnected (SteamID: ", ply:SteamID(), ").")
 	print(ply:Nick(), " disconnected ", ply:SteamID(), ply:SteamID64())
+	self:RemovePlayerFromReadyList(ply)
 end
 
 function GM:PlayerShouldTakeDamage(ply, attacker)
@@ -217,6 +165,18 @@ function GM:GetFallDamage(ply, speed)
 
 	--//suggested fall damage calclulation
 	return math.Clamp(speed - 580, 0, 200)
+end
+
+function BroadcastSound(dir)
+    net.Start("SendSingleSound")
+        net.WriteString(dir)
+    net.Broadcast()
+end
+
+function GlobalChatPrintColor(...)
+    for k, v in pairs(player.GetAll()) do
+        v:ChatPrintColor(...)
+    end
 end
 
 -- If we need to remove any map-spawned entities
