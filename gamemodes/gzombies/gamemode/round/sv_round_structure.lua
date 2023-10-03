@@ -19,7 +19,7 @@ function GM:StartPreRound()
     self:SetGameState(self.GameStates.PREGAME)
 
     local preGameTimer = 0
-    timer.Create(self.TimerNames.PreGameTimer, 0, 1, function()
+    timer.Create(self.TimerNames.PreGameTimer, 1, 0, function()
         preGameTimer = preGameTimer + 1
         GAMEMODE:BroadcastTimerStatus(self.TimerNames.PreGameTimer, preGameTimer)
     
@@ -38,7 +38,13 @@ end
 
 --Begins the round (locks in all players)
 function GM:StartRound()
-    --Do any work
+    --[[What all needs to get done by round start?
+        - Remove any "countdown" data (i.e. timer, player readiness, etc)
+        - Set game state to "round in progress"
+        - Prepare the map (spawn in lootables, spawn in NPCs, prepare special objectives for the players)
+        - Spawn in the players
+            - After a delay, let them play
+    ]]
     self:SetGameState(self.GameStates.ACTIVE)
     timer.Remove(self.TimerNames.PreGameTimer)
     self:SetupMap(true) --Probably a bad idea to do this right at round start
@@ -64,7 +70,7 @@ function GM:StartEndRound()
     timer.Remove(self.TimerNames.GameTimer)
 
     local postGameTimer = 0
-    timer.Create(self.TimerNames.PostGameTimer, 0, 1, function()
+    timer.Create(self.TimerNames.PostGameTimer, 1, 0, function()
         postGameTimer = postGameTimer + 1
         GAMEMODE:BroadcastTimerStatus(self.TimerNames.PostGameTimer, postGameTimer)
     

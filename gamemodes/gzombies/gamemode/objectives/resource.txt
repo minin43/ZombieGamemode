@@ -1,0 +1,6 @@
+https://escapefromtarkov.fandom.com/wiki/Quests
+https://stalker.fandom.com/wiki/List_of_primary_missions
+
+I'm thinking, instead of having individual quests/objectives, there's multiple available (~3?) and you can do as many as you want, but you need to complete at least 1 before extracting/leaving.
+Certain objectives might be completable only by 1 person, others might be completable by multiple/everyone. There should be some sort of description of the objectives given to everyone, but you don't
+know if a certain solo objective has been completed (i.e. find a specific tiem) until someone's extracted with it.
