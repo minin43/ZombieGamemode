@@ -1,6 +1,20 @@
-https://escapefromtarkov.fandom.com/wiki/Quests
-https://stalker.fandom.com/wiki/List_of_primary_missions
-
 I'm thinking, instead of having individual quests/objectives, there's multiple available (~3?) and you can do as many as you want, but you need to complete at least 1 before extracting/leaving.
 Certain objectives might be completable only by 1 person, others might be completable by multiple/everyone. There should be some sort of description of the objectives given to everyone, but you don't
 know if a certain solo objective has been completed (i.e. find a specific tiem) until someone's extracted with it.
+
+Ideas:
+    - Similar to Tarkov, there's different vendors, but the set of quests come from them at random
+    - There's two "kinds" of quests: specific and generic
+        - Specific include things like interacting with an object on the map or retrieving a specific object, only one player can complete these
+        - Generic include extracting with a certain amount of a certain loot type, all players can complete these individually
+    - 
+
+General Quest Ideas:
+    - Specific object retrieval
+    - Specific object interaction
+    - Loot retrieval
+    - Kill players (they drop dog tags you can pick up)
+    - Kill zombies
+    - https://escapefromtarkov.fandom.com/wiki/Quests
+    - https://stalker.fandom.com/wiki/List_of_primary_missions
+    - 
